@@ -1,0 +1,500 @@
+
+body {
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    background-color: #f0f0f0 !important;
+    padding-top: 0;
+}
+
+.slide-image {
+    width: 100%;
+}
+
+.carousel-holder {
+    margin-bottom: 30px;
+}
+
+.carousel-control,
+.item {
+    border-radius: 4px;
+}
+
+.caption {
+    height: 130px;
+    overflow: hidden;
+}
+
+#booksList{
+    margin: 5px;
+}
+
+.caption h4 {
+    white-space: nowrap;
+}
+
+.card img {
+    width: 100% !important;
+    height: 180px !important;
+    border-bottom: 1px solid rgba(234, 234, 234, 0.27);
+}
+
+img.see-count {
+    height: 20px !important;
+    width: 20px !important;
+    margin-right: 5px;
+}
+
+.ratings {
+    padding-right: 10px;
+    padding-left: 10px;
+    color: #d17581;
+}
+
+.add-info{
+    height: 20px;
+    width: 150px;
+}
+
+.card {
+    margin: 10px;
+    height: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    width: 160px;
+    float: left;
+}
+
+.ava-form .ui-state-error{
+    color: rgb(51, 51, 51) !important;
+}
+
+.ui-messages-error, .ui-message-error{
+    background-color: transparent !important;
+    color:#ff5304 !important;
+    border:0 !important;
+    font-size:15px !important;
+    font-weight:normal !important;
+    line-height: 20px !important;
+}
+
+.ui-tooltip {
+    max-width: 400px;
+    white-space:pre-wrap;
+}
+
+.ui-rating{
+    width: 200px;
+}
+
+.card .caption-full {
+    padding: 9px;
+    color: #333;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.6);
+}
+
+#slider {
+    width: 100%;
+    height: 300px;
+    margin-left: 30px;
+}
+
+#slider img {
+    height: 300px !important;
+    width: 100% !important;
+}
+
+.navbar {
+    margin-bottom: 0 !important;
+}
+
+#booksForm {
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+#searchForm {
+    height: 100%;
+    width: 600px;
+    float: right;
+
+}
+
+#searchForm .ui-menu {
+    height: 40px;
+    background: transparent;
+    border: 0;
+    color: white !important;
+}
+
+#searchForm .ui-menuitem {
+    color: rgba(210, 210, 210, 0.12);
+}
+
+span.ui-icon {
+    color: white;
+}
+
+.book-icon {
+    padding: 0;
+    width: 100%;
+
+}
+
+.navbar-nav{
+    height: 50px!important;;
+}
+
+.book-icon img{
+    vertical-align: top;
+}
+
+.book-info {
+    width: 100%;
+    padding: 10px;
+    padding-top: 5px;
+}
+
+.author {
+    font-size: 15px;
+    color: #363b41;
+    margin-top: 10px;
+    height: 40px;
+}
+
+.view-count {
+    height: 20px;
+    width: 100%;
+    color: #696969;
+}
+
+.ui-paginator select{
+    width:50px !important;
+}
+
+.box {
+    width: 100%;
+    height: 337px;
+    background: #dd993a url("../images/bg.jpg") center top no-repeat;
+}
+
+.main2 {
+    width: 1000px;
+    position: relative;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.module-specials {
+    border-top: none;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.module-specials .boxIndent {
+    padding: 34px 0px 0 0px;
+    margin: 0;
+    border: none;
+    background: none;
+    position: relative;
+}
+
+.box-product {
+    width: 100%;
+    height: auto;
+    list-style: none;
+    position: relative;
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.box-product li {
+    display: block;
+    float: none;
+    padding: 0;
+    list-style: none;
+    min-height: 300px;
+    width: auto;
+    margin: 0 0 0 0px;
+    padding: 0 33px 0 56px;
+    overflow: hidden;
+    background: url("../images/Row-product-bot.png") left bottom no-repeat;
+}
+
+.box-product li:first-child {
+    margin-bottom: -3px;
+}
+
+.box-product li div.row-product {
+    float: left;
+    width: 182px;
+    overflow: hidden;
+    position: relative;
+    min-height: 245px;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+.module-specials .featuredIndent {
+    background: none;
+    border: none;
+    text-align: left;
+    overflow: hidden;
+    position: relative;
+    min-height: 301px;
+    padding: 0;
+    margin: 0px 0px 0px 0px;
+    position: relative;
+    z-index: 1;
+}
+
+.module-specials .product_image_container {
+    text-align: left;
+    padding: 0;
+    background: none;
+    border: none;
+    width: 182px;
+    height: 246px;
+    position: relative;
+}
+
+.module-specials .product_image_shadow {
+    width: 179px;
+    height: 246px;
+    position: absolute;
+    right: 1px;
+    top: 0;
+    z-index: 0;
+    background: url("../images/book-shadow.png") left top no-repeat;
+}
+
+.module-specials .product_image_container img {
+    background: #fff;
+    height: 236px;
+    width: 157px;
+    position: relative;
+    z-index: 1;
+}
+
+.module-specials .boxIndent {
+    padding: 34px 0px 0 0px;
+    margin: 0;
+    border: none;
+    background: none;
+    position: relative;
+}
+
+.header-div {
+    height: 50px;
+
+}
+
+.genres {
+    margin-top: 20px;
+}
+
+.genres .list-group-item {
+    border: 0;
+}
+
+#booksForm .ui-datagrid-content {
+    border: 0 !important;
+}
+
+#booksForm .ui-datagrid-header {
+    padding: 0 !important;
+}
+
+#booksForm .ui-datagrid-column {
+    width: 200px !important;
+}
+
+.show-all {
+    border-bottom: 1px solid rgba(136, 136, 136, 0.14);
+}
+
+.genre-name {
+    font-size: 14px !important;
+    font-weight: normal !important;
+}
+
+.admin-region {
+    background-color: #f0f0f0;
+    height: 30px;
+    width: 100%;
+}
+
+img.delete-icon {
+    opacity: 0.5;
+    float: right;
+    margin: 5px;
+    margin-right: 10px;
+    height: 20px !important;
+    width: 15px !important;
+}
+
+img.edit-icon {
+    opacity: 0.5;
+    float: right;
+    margin: 5px;
+    margin-right: 10px;
+    height: 20px !important;
+    width: 20px !important;
+}
+
+.new-book-item {
+    background-color: transparent;
+    padding: 0 !important;
+}
+
+#loading_wrapper {
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    display: block;
+    z-index: 1000;
+}
+
+#loading_wrapper p {
+    background-color: #fde88e;
+    width: 150px;
+    height: 20px;
+    font-size: 14px;
+    margin: 0 auto;
+    font-weight: bold;
+    text-align: center;
+}
+
+.lang {
+    float: right;
+    margin-top: 2px;
+    padding: 5px;
+}
+
+.lang .active {
+    border-radius: 5px;
+    border: 1px solid #a5a5a5;
+}
+
+.lang-link {
+    margin: 5px;
+    padding: 5px;
+    color:#a0a0a0;
+    font-size: 14px !important;
+}
+
+ul.nav li.colored {
+    height: 50px;
+    background-color: #695e4e;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    cursor: pointer
+}
+
+ul.nav li.colored a:hover {
+    cursor: pointer;
+}
+
+ul.nav li:hover {
+    background-color: #353535;
+}
+
+.new-book-label {
+    color: white !important;
+    font-weight: normal !important;
+    font-size: 14px !important;
+}
+
+a.all-genres {
+    border-bottom: 2px solid rgba(165, 168, 169, 0.14) !important;
+    background-color: #f5f5f5 !important;
+    color: #7d7d7d !important;
+}
+
+a label {
+    cursor: pointer;
+}
+
+.navbar-fixed-top{
+    z-index: 100 !important;
+}
+
+.table-header {
+    height: 47px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #f5f5f5;
+    color: #7d7d7d;
+    font-size: 15px !important;
+    font-weight: normal !important;
+    padding-left: 15px;
+    text-align: left;
+    padding-right: 25px;
+    padding-top: 10px;
+}
+
+.social-icon {
+    width: 25px;
+    height: 25px;
+    margin-top: 13px;
+    margin-left: 20px;
+}
+
+.menu-bar {
+    width: 150px !important;
+    float: right !important;
+}
+
+.search-form {
+    width: 100%;
+    float: left;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+    height: 40px;
+}
+
+input.search {
+    margin-right: 10px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: white;
+    padding: 5px;
+    border: 0px solid rgba(192, 192, 192, 0.14);
+    cursor: text;
+    font-size: 14px;
+    color: #777777;
+}
+
+.ui-tabs .ui-tabs-panel {
+    padding: 1em 1.4em;
+    border: 1px solid #f0f0f0;
+    background-color: white !important;
+}
+
+.ui-tabs-panel label {
+    font-weight: normal !important;
+}
+
+.ui-growl-item{
+    z-index: 1000;
+
+}
+
+/*button.search-button{*/
+/*position:relative;*/
+/*padding:6px 15px;*/
+/*left:-8px;*/
+/*border:2px solid #207cca;*/
+/*background-color:#207cca;*/
+/*color:#fafafa;*/
+/*}*/
+/*.search .button:hover  {*/
+/*background-color:#fafafa;*/
+/*color:#207cca;*/
+/*}*/
