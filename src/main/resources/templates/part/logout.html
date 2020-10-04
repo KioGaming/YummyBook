@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+
+<div th:fragment="logout" style="float:right; width: 50%; text-align: right;">
+    <output th:text="#{welcome}" style=" color:lightgray; font-size: 14px; font-weight: normal; padding-top: 15px;"></output>
+    <a th:text="#{logout}" th:href="@{/logout}" style="color:#dd993a; margin-left: 20px;"></a>
+</div>
+
+</body>
+
+</html>

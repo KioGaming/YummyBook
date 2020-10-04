@@ -7,28 +7,27 @@
 
 <body>
 
-<div class="lang">
+<div th:fragment="locales" class="lang">
 
-    <select id="locales">
+    <select id="locales" class="lang-link">
         <option th:text="#{lang.change}" value=""></option>
         <option th:text="#{ua}" value="ua"></option>
         <option th:text="#{en}" value="en"></option>
         <option th:text="#{ru}" value="ru"></option>
     </select>
 
-</div>
-
-<script class="lang" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script class="lang" type="text/javascript">
-    $(document).ready(function() {
-        $("#locales").change(function () {
-            var selectedOption = $('#locales').val();
-            if (selectedOption != ''){
-                window.location.replace('index?lang=' + selectedOption);
-            }
+    <script class="lang" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script class="lang" type="text/javascript">
+        $(document).ready(function() {
+            $("#locales").change(function () {
+                var selectedOption = $('#locales').val();
+                if (selectedOption != ''){
+                    window.location.replace('index?lang=' + selectedOption);
+                }
+            });
         });
-    });
-</script>
+    </script>
+</div>
 
 </body>
 

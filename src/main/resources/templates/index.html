@@ -2,13 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title th:text="#{online_library}">YummyBook</title>
+    <link th:href="@{css/dialog.css}" rel="stylesheet" />
+    <link th:href="@{css/books.css}" rel="stylesheet" />
+    <link th:href="@{css/footer.css}" rel="stylesheet" />
 </head>
 
 <body>
+<!--img src="images/books.png" style="height:50px; padding:10px;"/-->
+<!--select id="locales" class="lang-link">
+    <option th:text="#{lang.change}" value=""></option>
+    <option th:text="#{ua}" value="ua"></option>
+    <option th:text="#{en}" value="en"></option>
+    <option th:text="#{ru}" value="ru"></option>
+</select-->
+<div th:insert="~{books/books-header :: books-header}"></div>
+<!--div th:insert="~{books/books-top :: body}"></div-->
 
-<div th:insert="~{books/books-header :: body}"></div>
+        <tr>
+            <td span="2">
+                <div th:insert="~{books/books-leftmenu :: body}"></div>
+            </td>
+            <td span="10">
+                <!--ui:insert name="content"/-->
+            </td>
+
+        <tr>
+
+    <div th:insert="~{books/books-footer :: books-footer}"></div>
 
 </body>
 

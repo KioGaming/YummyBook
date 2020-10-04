@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+</head>
+
+<body>
+<b:row>
+
+    <div class="genres">
+
+        <!--ссылка на поиск всех жанров-->
+        <a styleClass="list-group-item all-genres" >
+            <p th:text="#{all_genres}" styleClass="genre-name all-genres"></p>
+        </a>
+
+        <!--меню с навзваниями жанров (для поиска книг по жанрам) -->
+        <a class="list-group-item" >
+            <p value="test" styleClass="genre-name"></p>
+        </a>
+
+
+    </div>
+</b:row>
+</body>
+
+</html>
