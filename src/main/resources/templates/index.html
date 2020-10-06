@@ -10,27 +10,10 @@
 </head>
 
 <body>
-<!--img src="images/books.png" style="height:50px; padding:10px;"/-->
-<!--select id="locales" class="lang-link">
-    <option th:text="#{lang.change}" value=""></option>
-    <option th:text="#{ua}" value="ua"></option>
-    <option th:text="#{en}" value="en"></option>
-    <option th:text="#{ru}" value="ru"></option>
-</select-->
-<div th:insert="~{books/books-header :: books-header}"></div>
-<!--div th:insert="~{books/books-top :: body}"></div-->
 
-        <tr>
-            <td span="2">
-                <div th:insert="~{books/books-leftmenu :: body}"></div>
-            </td>
-            <td span="10">
-                <!--ui:insert name="content"/-->
-            </td>
+<header th:replace="~{books/books-header :: books-header}"></header>
 
-        <tr>
-
-    <div th:insert="~{books/books-footer :: books-footer}"></div>
+<footer th:replace="~{books/books-footer :: books-footer}"></footer>
 
 </body>
 

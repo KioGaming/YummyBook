@@ -7,46 +7,34 @@
 
 <body>
 
-<header th:fragment="books-header" class="header-div">
+<header th:fragment="books-header" style="background-color: #444444">
 
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <img src="images/books.png" style="height:40px; padding:10px;  margin: 5px 5px 5px 10%;"/>
 
-        <div class="container">
+    <select id="locales" style="color:#a0a0a0; width: 175px; font-size: 14px !important; position: absolute; top: 15px; margin-left: 35%;">
+        <option th:text="#{lang.change}" value=""></option>
+        <option th:text="#{ua}" value="ua"></option>
+        <option th:text="#{en}" value="en"></option>
+        <option th:text="#{ru}" value="ru"></option>
+    </select>
 
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <script class="lang" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script class="lang" type="text/javascript">
+        $(document).ready(function() {
+            $("#locales").change(function () {
+                var selectedOption = $('#locales').val();
+                if (selectedOption != ''){
+                    window.location.replace('index?lang=' + selectedOption);
+                }
+            });
+        });
+    </script>
 
+    <output th:text="#{welcome}" style=" color:lightgray; font-size: 14px; font-weight: normal; padding-top: 15px; position: absolute; top: 10px; margin-left: 65%;;"></output>
 
-                <img src="images/books.png" style="height:50px; padding:10px;"/>
-
-
-
-                <select id="locales" class="lang-link">
-                    <option th:text="#{lang.change}" value=""></option>
-                    <option th:text="#{ua}" value="ua"></option>
-                    <option th:text="#{en}" value="en"></option>
-                    <option th:text="#{ru}" value="ru"></option>
-                </select>
-
-                <script class="lang" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-                <script class="lang" type="text/javascript">
-                    $(document).ready(function() {
-                        $("#locales").change(function () {
-                            var selectedOption = $('#locales').val();
-                            if (selectedOption != ''){window.location.replace('index?lang=' + selectedOption);
-                            }
-                        });
-                    });
-                </script>
-
-            </div>
-
-        </div>
-
-    </nav>
-
+    <a th:text="#{logout}" th:href="@{/logout}" style="color:#dd993a; position: absolute; top: 25px; margin-left: 75%;"></a>
 
 </header>
-
 
 </body>
 
