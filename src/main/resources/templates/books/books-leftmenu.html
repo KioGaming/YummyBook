@@ -1,28 +1,25 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
     <meta charset="UTF-8"/>
 </head>
 
 <body>
-<b:row>
 
-    <div class="genres">
+<div class="genres" th:fragment="books-leftmenu">
 
-        <!--ссылка на поиск всех жанров-->
-        <a styleClass="list-group-item all-genres" >
-            <p th:text="#{all_genres}" styleClass="genre-name all-genres"></p>
-        </a>
+    <!--ссылка на поиск всех жанров-->
+    <a th:href="@{/index}" class="list-group-item all-genres">
+        <output th:text="#{all_genres}" class="genre-name all-genres"></output>
+    </a>
 
-        <!--меню с навзваниями жанров (для поиска книг по жанрам) -->
-        <a class="list-group-item" >
-            <p value="test" styleClass="genre-name"></p>
-        </a>
-
+    <a th:href="@{/index}" class="list-group-item">
+        <output th:text="test" class="genre-name"></output>
+    </a>
 
     </div>
-</b:row>
+
 </body>
 
 </html>

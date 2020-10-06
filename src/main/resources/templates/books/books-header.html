@@ -7,11 +7,11 @@
 
 <body>
 
-<header th:fragment="books-header" style="background-color: #444444">
+<header th:fragment="books-header" style="background-color: #444444; height: 60px">
 
-    <img src="images/books.png" style="height:40px; padding:10px;  margin: 5px 5px 5px 10%;"/>
+    <img src="images/books.png" style="height:40px; padding:10px;  margin-left: 10%;"/>
 
-    <select id="locales" style="color:#a0a0a0; width: 175px; font-size: 14px !important; position: absolute; top: 15px; margin-left: 35%;">
+    <select id="locales" style="color:#a0a0a0; width: 175px; font-size: 14px !important; position: absolute; top: 10px; margin-left: 35%;">
         <option th:text="#{lang.change}" value=""></option>
         <option th:text="#{ua}" value="ua"></option>
         <option th:text="#{en}" value="en"></option>
@@ -30,9 +30,9 @@
         });
     </script>
 
-    <output th:text="#{welcome}" style=" color:lightgray; font-size: 14px; font-weight: normal; padding-top: 15px; position: absolute; top: 10px; margin-left: 65%;;"></output>
+    <output th:text="#{welcome}" style=" color:lightgray; font-size: 14px; font-weight: normal; padding-top: 15px; position: absolute; top: 5px; margin-left: 65%;;"></output>
 
-    <a th:text="#{logout}" th:href="@{/logout}" style="color:#dd993a; position: absolute; top: 25px; margin-left: 75%;"></a>
+    <a th:text="#{logout}" th:href="@{/logout}" style="color:#dd993a; text-decoration: none; position: absolute; top: 20px; margin-left: 75%;"></a>
 
 </header>
 
