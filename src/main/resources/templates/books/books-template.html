@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="#{online_library}">YummyBook</title>
+    <link th:href="@{css/dialog.css}" rel="stylesheet"/>
+    <link th:href="@{css/books.css}" rel="stylesheet"/>
+    <link th:href="@{css/footer.css}" rel="stylesheet"/>
+</head>
+
+<body>
+
+<header th:replace="~{books/books-header :: books-header}"></header>
+
+<div th:replace="~{books/books-top :: books-top}"></div>
+
+<div th:replace="~{books/books-leftmenu :: books-leftmenu}"></div>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th th:text="ааааа"></th>
+        <th th:text="ббббб"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book, iStat : ${bookPage.content}"
+        th:style="${iStat.odd}? 'font-weight: bold;'"
+        th:alt-title="${iStat.even}? 'even' : 'odd'">
+        <img th:src="${book.imageBase64}"/>
+    </tr>
+    </tbody>
+</table>
+<div th:if="${bookPage.totalPages > 0}" class="pagination"
+     th:each="pageNumber : ${pageNumbers}">
+    <a th:href="@{/listBooks(size=${bookPage.size}, page=${pageNumber})}"
+       th:text="${pageNumber}"
+       th:class="${pageNumber==bookPage.number + 1} ? active"></a>
+</div>
+
+<footer th:replace="~{books/books-footer :: books-footer}"></footer>
+
+</body>
+
+</html>
