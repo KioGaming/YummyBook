@@ -7,19 +7,30 @@
 
 <body>
 
-<div class="genres" th:fragment="books-leftmenu">
-
-
-    <!--ссылка на поиск всех жанров-->
-    <a th:href="@{/index}" class="list-group-item all-genres">
-        <output th:text="#{all_genres}" class="genre-name all-genres"></output>
-    </a>
-
-    <a th:href="@{/index}" class="list-group-item">
-        <output th:text="test" class="genre-name"></output>
-    </a>
-
-</div>
+<nav th:fragment="books-leftmenu" class="sidenav">
+    <table border="5">
+        <tbody>
+        <tr>
+            <td>
+                <div style="width: 100px; height: 50px; text-align: center; margin: 10px 10px 10px 10px">
+                    <a th:href="@{/index}" class="list-group-item all-genres">
+                        <output th:text="#{all_genres}" class="genre-name all-genres"></output>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="width: 100px; height: 50px; text-align: center; margin: 10px 10px 10px 10px">
+                    <a th:href="@{/index}" class="list-group-item all-genres">
+                        <output th:text="test" class="genre-name"></output>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</nav>
 
 </body>
 

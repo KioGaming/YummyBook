@@ -17,27 +17,62 @@
 
 <div th:replace="~{books/books-leftmenu :: books-leftmenu}"></div>
 
-<table border="1">
-    <thead>
-    <tr>
-        <th th:text="ааааа"></th>
-        <th th:text="ббббб"></th>
-    </tr>
-    </thead>
+<table border="1" style="margin-left: 20%">
     <tbody>
-    <tr th:each="book, iStat : ${bookPage.content}"
-        th:style="${iStat.odd}? 'font-weight: bold;'"
-        th:alt-title="${iStat.even}? 'even' : 'odd'">
-        <img th:src="${book.imageBase64}"/>
+    <tr th:each="bookList, iStat : ${bookLists}">
+        <!--обложка книги-->
+        <td th:each="book, jStat : ${bookList}">
+            <div class="book-icon">
+                <img th:src="${book.imageBase64}" style="height:250px; width: 200px"/>
+            </div>
+
+            <!--описание книги-->
+            <div class="book-info">
+                <div class="author">
+                    <span th:text="${book.author.fio}" class="author"></span>
+                </div>
+
+
+                <!-- нижняя часть под картинкой -->
+                <div class="add-info">
+                    <div style="width:10%; float:left;">
+                        <img src="images/see.png" class="see-count"/>
+                    </div>
+
+                    <!-- кол-во просмотров -->
+                    <div style="width:20%; float:left; margin-left: 10px; font-size: 14px;">
+                        <span th:text="${book.viewCount}" class="view-count" id="viewCountLabel"></span>
+                    </div>
+
+                    <!--голосование-->
+                    <div style="width:60%; float:right;">
+                        <span id="rating" th:text="${book.avgRating}" class="rating"></span>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!--инструменты администратора (редактирование, удаление)-->
+            <div class="admin-region" sec:authorize="hasAuthority('ADMIN')">
+                <a href="/index" title="#{msg.delete}">
+                    <img src="images/delete.png" class="delete-icon"/>
+                </a>
+
+                <a href="/index" title="#{msg.edit}">
+                    <img src="images/edit.png" class="edit-icon"/>
+                </a>
+            </div>
+        </td>
     </tr>
     </tbody>
 </table>
-<div th:if="${bookPage.totalPages > 0}" class="pagination"
+<!--div th:if="${bookPage.totalPages > 0}" class="pagination"
      th:each="pageNumber : ${pageNumbers}">
     <a th:href="@{/listBooks(size=${bookPage.size}, page=${pageNumber})}"
        th:text="${pageNumber}"
        th:class="${pageNumber==bookPage.number + 1} ? active"></a>
-</div>
+</div-->
 
 <footer th:replace="~{books/books-footer :: books-footer}"></footer>
 

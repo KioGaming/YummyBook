@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import pp.ua.library.yummybook.dao.BookDao;
 import pp.ua.library.yummybook.domain.Book;
 
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +40,18 @@ public class RedirectController {
         for (int i = 0; i < bookPage.getContent().size(); i++) {
             bookPage.getContent().get(i).setImageBase64("data:image/png;base64," + Base64.getEncoder().encodeToString(bookPage.getContent().get(i).getImage()));
         }
-        model.addAttribute("bookPage", bookPage);
+        List<List<Book>> bookLists = new ArrayList<>();
+        for (int j = 0; j < Math.ceil(bookPage.getContent().size()/5.0); j++) {
+            List<Book> bookList = new ArrayList<>();
+            for (int i = j * 5; i < (j + 1) * 5; i++) {
+                if(bookPage.getContent().size() == i){
+                    break;
+                }
+                bookList.add(bookPage.getContent().get(i));
+            }
+            bookLists.add(bookList);
+        }
+        model.addAttribute("bookLists", bookLists);
 
         int totalPages = bookPage.getTotalPages();
         if (totalPages > 0) {
