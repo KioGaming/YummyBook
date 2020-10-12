@@ -17,51 +17,34 @@
 
 <div th:replace="~{books/books-leftmenu :: books-leftmenu}"></div>
 
-<table border="1" style="margin-left: 20%">
+<table border="1" style="margin-left: 25%">
     <tbody>
     <tr th:each="bookList, iStat : ${bookLists}">
         <!--обложка книги-->
-        <td th:each="book, jStat : ${bookList}">
-            <div class="book-icon">
-                <img th:src="${book.imageBase64}" style="height:250px; width: 200px"/>
-            </div>
-
-            <!--описание книги-->
-            <div class="book-info">
-                <div class="author">
-                    <span th:text="${book.author.fio}" class="author"></span>
-                </div>
-
-
-                <!-- нижняя часть под картинкой -->
-                <div class="add-info">
-                    <div style="width:10%; float:left;">
-                        <img src="images/see.png" class="see-count"/>
-                    </div>
-
-                    <!-- кол-во просмотров -->
-                    <div style="width:20%; float:left; margin-left: 10px; font-size: 14px;">
-                        <span th:text="${book.viewCount}" class="view-count" id="viewCountLabel"></span>
-                    </div>
-
-                    <!--голосование-->
-                    <div style="width:60%; float:right;">
-                        <span id="rating" th:text="${book.avgRating}" class="rating"></span>
+        <td th:each="book, jStat : ${bookList}" style="width: 150px; height: 200px; padding: 10px 10px 10px 10px">
+            <div class="border">
+                <div>
+                    <div>
+                        <a href="" style="height:200px; width: 150px"><img th:src="${book.imageBase64}"
+                                                                           style="height:200px; width: 150px"></a>
                     </div>
                 </div>
-
-
-            </div>
-
-            <!--инструменты администратора (редактирование, удаление)-->
-            <div class="admin-region" sec:authorize="hasAuthority('ADMIN')">
-                <a href="/index" title="#{msg.delete}">
-                    <img src="images/delete.png" class="delete-icon"/>
-                </a>
-
-                <a href="/index" title="#{msg.edit}">
-                    <img src="images/edit.png" class="edit-icon"/>
-                </a>
+                <div class="book-info">
+                    <h3 th:text="${book.name}" class="book-title"></h3>
+                    <h3 th:text="${book.author.fio}" class="book-author"></h3>
+                    <img src="images/see.png" class="see-count"/>
+                    <span th:text="${book.viewCount}" class="view-count"></span>
+                    <img src="images/see.png" class="avgRating"/>
+                    <span th:text="${book.avgRating}" class="main-rating"></span>
+                </div>
+                <div class="admin-region" sec:authorize="hasAuthority('ADMIN')">
+                    <a href="/index">
+                        <img src="images/delete.png" th:alt="#{delete}" class="delete-icon"/>
+                    </a>
+                    <a href="/index">
+                        <img src="images/edit.png" th:alt="#{edit}" class="edit-icon"/>
+                    </a>
+                </div>
             </div>
         </td>
     </tr>

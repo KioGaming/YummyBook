@@ -40,9 +40,24 @@ body {
 img.see-count {
     height: 20px !important;
     width: 20px !important;
-    margin-right: 5px;
+    margin-top: 2px;
 }
-
+img.avgRating {
+    height: 20px !important;
+    width: 20px !important;
+    position: absolute;
+    margin-left: 60px;
+    margin-top: 5px;
+}
+body .main-rating {
+    font-size: 14px;
+    color: #fff;
+    background: #f2b800;
+    padding: 0 5px;
+    border-radius: 3px;
+    font-weight: 600;
+    margin-left: 80px;
+}
 .ratings {
     padding-right: 10px;
     padding-left: 10px;
@@ -164,11 +179,6 @@ span.ui-icon {
     height: 40px;
 }
 
-.view-count {
-    height: 20px;
-    width: 100%;
-    color: #696969;
-}
 
 .ui-paginator select{
     width:50px !important;
@@ -433,12 +443,76 @@ a label {
     cursor: pointer;
 }
 
+* {box-sizing: border-box;}
+.border {
+    width: 185px;
+    margin: 0 auto;
+    background: white;
+    padding: 15px;
+    border: 1px solid #F1E7E8;
+}
+
+.border:hover .product-wrap:after {
+    opacity: 1;
+    transform: scale(1);
+}
+.product-wrap a {
+    display: block;
+    text-decoration: none;
+}
+
+.loop-action {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: .3s ease-in-out;
+}
+.border:hover .loop-action {opacity: 1;}
+.border:hover {border-color: #4966A2;}
+.book-info {padding-top: 15px;}
+.stars {
+    font-size: 14px;
+    text-align: right;
+    position: absolute;
+    margin-left: 60px;
+    margin-top: 5px;
+}
+.book-title {
+    text-align: center;
+    font-weight: bold;
+    font-family: "Open Sans";
+    color: #162546;
+    font-size: 18px;
+}
+
+.book-author  {
+    text-align: center;
+    font-weight: normal;
+    font-family: "Open Sans";
+    color: #162546;
+    font-size: 14px;
+}
+
+.view-count {
+    font-size: 14px;
+    color: #fff;
+    background:  #3cce7b;
+    padding: 0 5px;
+    border-radius: 3px;
+    font-weight: 600;
+    text-align: left;
+    position: absolute;
+    margin-top: 5px;
+}
+
 .sidenav {
-    width: 130px;
-    position: fixed;
+    width: 150px;
+    position: absolute;
     z-index: 1;
-    top: 450px;
-    left: 10px;
+    top: 400px;
+    left: 100px;
     background: #eee;
     overflow-x: hidden;
     padding: 8px 0;
