@@ -34,7 +34,7 @@
                     <h3 th:text="${book.author.fio}" class="book-author"></h3>
                     <img src="images/see.png" class="see-count"/>
                     <span th:text="${book.viewCount}" class="view-count"></span>
-                    <img src="images/see.png" class="avgRating"/>
+                    <img src="images/star.png" class="avgRating"/>
                     <span th:text="${book.avgRating}" class="main-rating"></span>
                 </div>
                 <div class="admin-region" sec:authorize="hasAuthority('ADMIN')">
@@ -50,13 +50,30 @@
     </tr>
     </tbody>
 </table>
-<!--div th:if="${bookPage.totalPages > 0}" class="pagination"
+<div th:if="${totalPages > 0}" class="pagination"
      th:each="pageNumber : ${pageNumbers}">
-    <a th:href="@{/listBooks(size=${bookPage.size}, page=${pageNumber})}"
+    <a th:href="@{/booksPage(size=${size}, page=${pageNumber})}"
        th:text="${pageNumber}"
-       th:class="${pageNumber==bookPage.number + 1} ? active"></a>
-</div-->
-
+       th:class="${pageNumber==number + 1} ? active"></a>
+</div>
+<select id="currentPageSize" style="color:#a0a0a0; width: 175px; font-size: 14px !important; top: 10px; margin-left: 35%;">
+    <option th:text="${size}" value=""></option>
+    <option th:text="10" value="10"></option>
+    <option th:text="15" value="15"></option>
+    <option th:text="20" value="20"></option>
+    <option th:text="30" value="30"></option>
+</select>
+<script class="pageSize" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script class="pageSize" type="text/javascript">
+    $(document).ready(function() {
+        $("#currentPageSize").change(function () {
+            var selectedOption = $('#currentPageSize').val();
+            if (selectedOption != ''){
+                window.location.replace('?size=' + selectedOption);
+            }
+        });
+    });
+</script>
 <footer th:replace="~{books/books-footer :: books-footer}"></footer>
 
 </body>

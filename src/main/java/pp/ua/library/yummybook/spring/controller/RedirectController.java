@@ -25,7 +25,7 @@ public class RedirectController {
     @Autowired
     BookDao bookDao;
 
-    @RequestMapping(value = {"", "/index"})
+    @RequestMapping(value = {"", "/booksPage"})
     public String baseUrlRedirect(Model model,
                                   @RequestParam("page") Optional<Integer> page,
                                   @RequestParam("size") Optional<Integer> size,
@@ -52,6 +52,9 @@ public class RedirectController {
             bookLists.add(bookList);
         }
         model.addAttribute("bookLists", bookLists);
+        model.addAttribute("totalPages", bookPage.getTotalPages());
+        model.addAttribute("size", bookPage.getSize());
+        model.addAttribute("number", bookPage.getSize());
 
         int totalPages = bookPage.getTotalPages();
         if (totalPages > 0) {
