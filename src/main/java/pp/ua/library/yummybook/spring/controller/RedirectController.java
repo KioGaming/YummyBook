@@ -9,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pp.ua.library.yummybook.dao.BookDao;
+import pp.ua.library.yummybook.dao.GenreDao;
 import pp.ua.library.yummybook.domain.Book;
+import pp.ua.library.yummybook.domain.Genre;
 
 import java.util.ArrayList;
 import java.util.Base64;
@@ -24,6 +26,8 @@ public class RedirectController {
 
     @Autowired
     BookDao bookDao;
+    @Autowired
+    GenreDao genreDao;
 
     @RequestMapping(value = {"", "/booksPage"})
     public String baseUrlRedirect(Model model,
@@ -32,7 +36,10 @@ public class RedirectController {
                                   @RequestParam("sort") Optional<String> sort,
                                   @RequestParam("direction") Optional<Sort.Direction> direction) {
         int currentPage = page.orElse(1) - 1;
-        int pageSize = size.orElse(20);
+        int pageSize = size.orElse(20);;
+        if(pageSize != 10 && pageSize != 15 && pageSize != 20 && pageSize != 30){
+            pageSize = 20;
+        }
         String sortField = sort.orElse("name");
         Sort.Direction sortDirection = direction.orElse(Sort.Direction.ASC);
 
@@ -56,6 +63,15 @@ public class RedirectController {
         model.addAttribute("size", bookPage.getSize());
         model.addAttribute("number", bookPage.getSize());
 
+        List<Book> topBooks = bookDao.findTopBooks(5);
+        for (Book topBook: topBooks) {
+            topBook.setImageBase64("data:image/png;base64," + Base64.getEncoder().encodeToString(topBook.getImage()));
+        }
+        model.addAttribute("topBookList", topBooks);
+
+        List<Genre> genreList = genreDao.getAll();
+        model.addAttribute("genreList", genreList);
+
         int totalPages = bookPage.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
@@ -63,6 +79,6 @@ public class RedirectController {
                     .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
-        return "books/books-template";
+        return "index";
     }
 }

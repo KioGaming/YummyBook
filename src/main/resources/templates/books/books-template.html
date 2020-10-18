@@ -10,13 +10,7 @@
 </head>
 
 <body>
-
-<header th:replace="~{books/books-header :: books-header}"></header>
-
-<div th:replace="~{books/books-top :: books-top}"></div>
-
-<div th:replace="~{books/books-leftmenu :: books-leftmenu}"></div>
-
+<div th:fragment="books-template">
 <table border="1" style="margin-left: 25%">
     <tbody>
     <tr th:each="bookList, iStat : ${bookLists}">
@@ -50,13 +44,15 @@
     </tr>
     </tbody>
 </table>
-<div th:if="${totalPages > 0}" class="pagination"
-     th:each="pageNumber : ${pageNumbers}">
+<span style="margin-left: 45%">
+<span th:if="${totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
     <a th:href="@{/booksPage(size=${size}, page=${pageNumber})}"
        th:text="${pageNumber}"
-       th:class="${pageNumber==number + 1} ? active"></a>
-</div>
-<select id="currentPageSize" style="color:#a0a0a0; width: 175px; font-size: 14px !important; top: 10px; margin-left: 35%;">
+       th:class="${pageNumber==number + 1} ? active" style="font-size: 14px; color: #fff; background: #800080; padding: 0 5px;
+                                                            border-radius: 3px; font-weight: 600;}"></a>
+</span>
+</span>
+<select id="currentPageSize" style="color:#a0a0a0; width: 50px; font-size: 14px !important;">
     <option th:text="${size}" value=""></option>
     <option th:text="10" value="10"></option>
     <option th:text="15" value="15"></option>
@@ -74,8 +70,7 @@
         });
     });
 </script>
-<footer th:replace="~{books/books-footer :: books-footer}"></footer>
-
+</div>
 </body>
 
 </html>

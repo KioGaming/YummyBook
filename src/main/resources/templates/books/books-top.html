@@ -15,17 +15,17 @@
                 <ul class="box-product">
 
                     <li>
-
+ <span th:each="topBook, iStat : ${topBookList}">
                         <div class="row-product">
                             <div class="featuredIndent">
                                 <div class="product_image_container">
 
-
+                                        <img th:src="${topBook.imageBase64}">
 
                                 </div>
                             </div>
                         </div>
-
+   </span>
                     </li>
 
                 </ul>
