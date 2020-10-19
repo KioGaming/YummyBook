@@ -50,6 +50,7 @@ public class Book {
     private long totalVoteCount;
     @Column(name = "avg_rating")
     private int avgRating;
+    @Transient
     private String imageBase64;
 
     public Book() {

@@ -11,7 +11,8 @@
 
     <img src="images/books.png" style="height:60px; padding:10px;  margin-left: 10%;"/>
 
-    <select id="locales" style="color:#a0a0a0; width: 175px; font-size: 14px !important; position: absolute; top: 10px; margin-left: 35%;">
+    <select id="locales"
+            style="color:#a0a0a0; width: 175px; font-size: 14px !important; position: absolute; top: 10px; margin-left: 25%;">
         <option th:text="#{lang.change}" value=""></option>
         <option th:text="#{ua}" value="ua"></option>
         <option th:text="#{en}" value="en"></option>
@@ -20,19 +21,24 @@
 
     <script class="lang" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script class="lang" type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $("#locales").change(function () {
                 var selectedOption = $('#locales').val();
-                if (selectedOption != ''){
+                if (selectedOption != '') {
                     window.location.replace('?lang=' + selectedOption);
                 }
             });
         });
     </script>
 
-    <output th:text="#{welcome}" style=" color:lightgray; font-size: 14px; font-weight: normal; padding-top: 15px; position: absolute; top: 5px; margin-left: 65%;;"></output>
+    <form name="searchByAuthorOrTitle" method="post" action="/booksPage" style="font-size: 14px !important; position: absolute; top: 10px; margin-left: 55%;">
+        <input type="text" size="40" style="width: 175px; height: 35px; border-radius: 5px;" th:name="authorOrTitle" th:placeholder="#{search}">
+    </form>
+    <output th:text="#{welcome}"
+            style=" color:lightgray; font-size: 14px; font-weight: normal; padding-top: 15px; position: absolute; top: 5px; margin-left: 65%;;"></output>
 
-    <a th:text="#{logout}" th:href="@{/logout}" style="color:#dd993a; text-decoration: none; position: absolute; top: 20px; margin-left: 75%;"></a>
+    <a th:text="#{logout}" th:href="@{/logout}"
+       style="color:#dd993a; text-decoration: none; position: absolute; top: 20px; margin-left: 75%;"></a>
 
 </header>
 

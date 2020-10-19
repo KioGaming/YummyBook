@@ -33,28 +33,27 @@ public class RedirectController {
     public String baseUrlRedirect(Model model,
                                   @RequestParam("page") Optional<Integer> page,
                                   @RequestParam("size") Optional<Integer> size,
-                                  @RequestParam("sort") Optional<String> sort,
-                                  @RequestParam("direction") Optional<Sort.Direction> direction,
-                                  @RequestParam("genre") Optional<Long> genreId) {
+                                  @RequestParam("genre") Optional<Long> genreId,
+                                  @RequestParam("authorOrTitle") Optional<String> authorOrTitle) {
         int currentPage = page.orElse(1) - 1;
-        int pageSize = size.orElse(20);;
-        if(pageSize != 10 && pageSize != 15 && pageSize != 20 && pageSize != 30){
-            pageSize = 20;
-        }
-        String sortField = sort.orElse("name");
-        Sort.Direction sortDirection = direction.orElse(Sort.Direction.ASC);
+        int pageSize = size.orElse(20);
+        if(pageSize != 10 && pageSize != 15 && pageSize != 20 && pageSize != 30) pageSize = 20;
+        String sortField = "name";
+        Sort.Direction sortDirection = Sort.Direction.ASC;
 
         Page<Book> bookPage;
         if(genreId.isPresent()) {
             bookPage = bookDao.findByGenre(currentPage, pageSize, sortField, sortDirection, genreId.get());
             model.addAttribute("genre", genreId.get());
+        } else if(authorOrTitle.isPresent()) {
+            bookPage = bookDao.search(currentPage, pageSize, sortField, sortDirection, authorOrTitle.get());
+            model.addAttribute("authorOrTitle", authorOrTitle.get());
         } else {
             bookPage = bookDao.getAll(currentPage, pageSize, sortField, sortDirection);
         }
         for (int i = 0; i < bookPage.getContent().size(); i++) {
             bookPage.getContent().get(i).setImageBase64("data:image/png;base64," + Base64.getEncoder().encodeToString(bookPage.getContent().get(i).getImage()));
         }
-
         List<List<Book>> bookLists = new ArrayList<>();
         for (int j = 0; j < Math.ceil(bookPage.getContent().size()/5.0); j++) {
             List<Book> bookList = new ArrayList<>();
@@ -66,27 +65,26 @@ public class RedirectController {
             }
             bookLists.add(bookList);
         }
-        model.addAttribute("bookLists", bookLists);
-        model.addAttribute("totalPages", bookPage.getTotalPages());
-        model.addAttribute("size", bookPage.getSize());
-        model.addAttribute("number", bookPage.getSize());
+        int totalPages = bookPage.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
 
         List<Book> topBooks = bookDao.findTopBooks(5);
         for (Book topBook: topBooks) {
             topBook.setImageBase64("data:image/png;base64," + Base64.getEncoder().encodeToString(topBook.getImage()));
         }
-        model.addAttribute("topBookList", topBooks);
 
         List<Genre> genreList = genreDao.getAll();
+
+        model.addAttribute("bookLists", bookLists);
+        model.addAttribute("totalPages", bookPage.getTotalPages());
+        model.addAttribute("size", bookPage.getSize());
+        model.addAttribute("number", bookPage.getSize());
+        model.addAttribute("topBookList", topBooks);
         model.addAttribute("genreList", genreList);
 
-        int totalPages = bookPage.getTotalPages();
-        if (totalPages > 0) {
-            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-                    .boxed()
-                    .collect(Collectors.toList());
-            model.addAttribute("pageNumbers", pageNumbers);
-        }
         return "index";
     }
 }
