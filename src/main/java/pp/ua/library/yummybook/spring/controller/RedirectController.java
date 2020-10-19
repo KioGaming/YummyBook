@@ -8,11 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import pp.ua.library.yummybook.dao.BookDao;
 import pp.ua.library.yummybook.dao.GenreDao;
 import pp.ua.library.yummybook.domain.Book;
 import pp.ua.library.yummybook.domain.Genre;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -37,15 +39,15 @@ public class RedirectController {
                                   @RequestParam("authorOrTitle") Optional<String> authorOrTitle) {
         int currentPage = page.orElse(1) - 1;
         int pageSize = size.orElse(20);
-        if(pageSize != 10 && pageSize != 15 && pageSize != 20 && pageSize != 30) pageSize = 20;
+        if (pageSize != 10 && pageSize != 15 && pageSize != 20 && pageSize != 30) pageSize = 20;
         String sortField = "name";
         Sort.Direction sortDirection = Sort.Direction.ASC;
 
         Page<Book> bookPage;
-        if(genreId.isPresent()) {
+        if (genreId.isPresent()) {
             bookPage = bookDao.findByGenre(currentPage, pageSize, sortField, sortDirection, genreId.get());
             model.addAttribute("genre", genreId.get());
-        } else if(authorOrTitle.isPresent()) {
+        } else if (authorOrTitle.isPresent()) {
             bookPage = bookDao.search(currentPage, pageSize, sortField, sortDirection, authorOrTitle.get());
             model.addAttribute("authorOrTitle", authorOrTitle.get());
         } else {
@@ -55,10 +57,10 @@ public class RedirectController {
             bookPage.getContent().get(i).setImageBase64("data:image/png;base64," + Base64.getEncoder().encodeToString(bookPage.getContent().get(i).getImage()));
         }
         List<List<Book>> bookLists = new ArrayList<>();
-        for (int j = 0; j < Math.ceil(bookPage.getContent().size()/5.0); j++) {
+        for (int j = 0; j < Math.ceil(bookPage.getContent().size() / 5.0); j++) {
             List<Book> bookList = new ArrayList<>();
             for (int i = j * 5; i < (j + 1) * 5; i++) {
-                if(bookPage.getContent().size() == i){
+                if (bookPage.getContent().size() == i) {
                     break;
                 }
                 bookList.add(bookPage.getContent().get(i));
@@ -72,7 +74,7 @@ public class RedirectController {
         }
 
         List<Book> topBooks = bookDao.findTopBooks(5);
-        for (Book topBook: topBooks) {
+        for (Book topBook : topBooks) {
             topBook.setImageBase64("data:image/png;base64," + Base64.getEncoder().encodeToString(topBook.getImage()));
         }
 
@@ -86,5 +88,16 @@ public class RedirectController {
         model.addAttribute("genreList", genreList);
 
         return "index";
+    }
+
+    @RequestMapping(value = {"/getBook"}, produces = "application/pdf")
+    @ResponseBody
+    public byte[] getBook(HttpServletRequest request, @RequestParam("bookId") Optional<Long> bookId) {
+        if (bookId.isPresent()) {
+            byte[] bookContent = bookDao.getContent(bookId.get());
+            return bookContent;
+        } else {
+            return null;
+        }
     }
 }
