@@ -10,10 +10,10 @@
 <nav th:fragment="books-leftmenu" class="sidenav">
     <table border="5">
         <tbody>
-        <tr >
+        <tr>
             <td>
-                <div style="width: 200px; height: 35px; text-align: center;" >
-                    <a th:href="@{/index}" class="list-group-item maingenres">
+                <div style="width: 200px; height: 35px; text-align: center;">
+                    <a th:href="@{/booksPage}" class="list-group-item maingenres">
                         <output th:text="#{all_genres}" class="genre-name all-genres"></output>
                     </a>
                 </div>
@@ -22,7 +22,7 @@
         <tr th:each="genre, jStat : ${genreList}">
             <td>
                 <div style="width: 200px; height: 35px; text-align: center;">
-                    <a th:href="@{/index}" class="list-group-item all-genres">
+                    <a th:href="@{'/booksPage?genre=' + ${genre.id} + '&size=' + ${size}}" class="list-group-item all-genres">
                         <output th:text="${genre.name}" class="genre-name"></output>
                     </a>
                 </div>

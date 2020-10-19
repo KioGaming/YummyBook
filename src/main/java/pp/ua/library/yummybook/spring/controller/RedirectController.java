@@ -34,7 +34,8 @@ public class RedirectController {
                                   @RequestParam("page") Optional<Integer> page,
                                   @RequestParam("size") Optional<Integer> size,
                                   @RequestParam("sort") Optional<String> sort,
-                                  @RequestParam("direction") Optional<Sort.Direction> direction) {
+                                  @RequestParam("direction") Optional<Sort.Direction> direction,
+                                  @RequestParam("genre") Optional<Long> genreId) {
         int currentPage = page.orElse(1) - 1;
         int pageSize = size.orElse(20);;
         if(pageSize != 10 && pageSize != 15 && pageSize != 20 && pageSize != 30){
@@ -43,10 +44,17 @@ public class RedirectController {
         String sortField = sort.orElse("name");
         Sort.Direction sortDirection = direction.orElse(Sort.Direction.ASC);
 
-        Page<Book> bookPage = bookDao.getAll(currentPage, pageSize, sortField, sortDirection);
+        Page<Book> bookPage;
+        if(genreId.isPresent()) {
+            bookPage = bookDao.findByGenre(currentPage, pageSize, sortField, sortDirection, genreId.get());
+            model.addAttribute("genre", genreId.get());
+        } else {
+            bookPage = bookDao.getAll(currentPage, pageSize, sortField, sortDirection);
+        }
         for (int i = 0; i < bookPage.getContent().size(); i++) {
             bookPage.getContent().get(i).setImageBase64("data:image/png;base64," + Base64.getEncoder().encodeToString(bookPage.getContent().get(i).getImage()));
         }
+
         List<List<Book>> bookLists = new ArrayList<>();
         for (int j = 0; j < Math.ceil(bookPage.getContent().size()/5.0); j++) {
             List<Book> bookList = new ArrayList<>();

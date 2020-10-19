@@ -46,7 +46,7 @@
 </table>
 <span style="margin-left: 45%">
 <span th:if="${totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
-    <a th:href="@{/booksPage(size=${size}, page=${pageNumber})}"
+    <a th:href="@{/booksPage(size=${size}, page=${pageNumber}, genre=${genre})}"
        th:text="${pageNumber}"
        th:class="${pageNumber==number + 1} ? active" style="font-size: 14px; color: #fff; background: #800080; padding: 0 5px;
                                                             border-radius: 3px; font-weight: 600;}"></a>
