@@ -31,7 +31,8 @@
                     <img src="images/star.png" class="avgRating"/>
                     <span th:text="${book.avgRating}" class="main-rating"></span>
                 </div>
-                <div class="admin-region" sec:authorize="hasAuthority('ADMIN')">
+                <!--div class="admin-region" sec:authorize="hasAuthority('ADMIN')"-->
+                <div class="admin-region">
                     <a href="/index">
                         <img src="images/delete.png" th:alt="#{delete}" class="delete-icon"/>
                     </a>
