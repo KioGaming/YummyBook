@@ -90,14 +90,30 @@ public class RedirectController {
         return "index";
     }
 
-    @RequestMapping(value = {"/getBook"}, produces = "application/pdf")
-    @ResponseBody
-    public byte[] getBook(HttpServletRequest request, @RequestParam("bookId") Optional<Long> bookId) {
+    @RequestMapping(value = {"/getBook"})
+    public String getBook(HttpServletRequest request, @RequestParam("bookId") Optional<Long> bookId) {
         if (bookId.isPresent()) {
             byte[] bookContent = bookDao.getContent(bookId.get());
-            return bookContent;
-        } else {
-            return null;
+            if (bookContent != null) {
+                request.setAttribute("bookContent", bookContent);
+                return "forward:/openBook";
+            }
         }
+        return "forward:/booksPage";
+        //добавить страничку ошибки
+    }
+
+    @RequestMapping(value = {"/openBook"}, produces = "application/pdf")
+    @ResponseBody
+    public byte[] openBook(HttpServletRequest request) {
+        return (byte[]) request.getAttribute("bookContent");
+    }
+
+    @RequestMapping(value = {"/deleteBook"})
+    public String baseUrlRedirect(@RequestParam("bookId") Optional<Long> bookId) {
+        if(bookId.isPresent()) {
+            bookDao.delete(bookDao.get(bookId.get()));
+        }
+        return "forward:/booksPage";
     }
 }

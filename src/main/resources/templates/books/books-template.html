@@ -33,7 +33,7 @@
                 </div>
                 <!--div class="admin-region" sec:authorize="hasAuthority('ADMIN')"-->
                 <div class="admin-region">
-                    <a href="/index">
+                    <a th:href="@{/deleteBook(bookId=${book.id})}">
                         <img src="images/delete.png" th:alt="#{delete}" class="delete-icon"/>
                     </a>
                     <a href="/index">
