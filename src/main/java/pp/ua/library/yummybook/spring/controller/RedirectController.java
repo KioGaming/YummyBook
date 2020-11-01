@@ -9,8 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pp.ua.library.yummybook.dao.AuthorDao;
 import pp.ua.library.yummybook.dao.BookDao;
 import pp.ua.library.yummybook.dao.GenreDao;
+import pp.ua.library.yummybook.dao.PublisherDao;
 import pp.ua.library.yummybook.domain.Book;
 import pp.ua.library.yummybook.domain.Genre;
 
@@ -30,6 +32,10 @@ public class RedirectController {
     BookDao bookDao;
     @Autowired
     GenreDao genreDao;
+    @Autowired
+    AuthorDao authorDao;
+    @Autowired
+    PublisherDao publisherDao;
 
     @RequestMapping(value = {"", "/booksPage"})
     public String baseUrlRedirect(Model model,
@@ -54,7 +60,7 @@ public class RedirectController {
             bookPage = bookDao.getAll(currentPage, pageSize, sortField, sortDirection);
         }
         for (int i = 0; i < bookPage.getContent().size(); i++) {
-            bookPage.getContent().get(i).setImageBase64("data:image/png;base64," + Base64.getEncoder().encodeToString(bookPage.getContent().get(i).getImage()));
+            byteToBase64Image(bookPage.getContent().get(i));
         }
         List<List<Book>> bookLists = new ArrayList<>();
         for (int j = 0; j < Math.ceil(bookPage.getContent().size() / 5.0); j++) {
@@ -75,7 +81,7 @@ public class RedirectController {
 
         List<Book> topBooks = bookDao.findTopBooks(5);
         for (Book topBook : topBooks) {
-            topBook.setImageBase64("data:image/png;base64," + Base64.getEncoder().encodeToString(topBook.getImage()));
+            byteToBase64Image(topBook);
         }
 
         List<Genre> genreList = genreDao.getAll();
@@ -110,10 +116,36 @@ public class RedirectController {
     }
 
     @RequestMapping(value = {"/deleteBook"})
-    public String baseUrlRedirect(@RequestParam("bookId") Optional<Long> bookId) {
+    public String deleteBook(@RequestParam("bookId") Optional<Long> bookId) {
         if(bookId.isPresent()) {
             bookDao.delete(bookDao.get(bookId.get()));
         }
         return "forward:/booksPage";
+    }
+
+    @RequestMapping(value = {"/editBook"})
+    public String editBook(@RequestParam("bookId") Optional<Long> bookId, Model model) {
+        if(bookId.isPresent()) {
+            Book book = bookDao.get(bookId.get());
+            byteToBase64Image(book);
+            model.addAttribute("book", book);
+            model.addAttribute("authorList", authorDao.getAll());
+            model.addAttribute("genreList", genreDao.getAll());
+            model.addAttribute("publisherList", publisherDao.getAll());
+            return "editingPage";
+        } else {
+            return "forward:/booksPage";
+            //добавить страничку ошибки
+        }
+    }
+
+    @RequestMapping(value = {"/saveBook"})
+    public String saveBook() {
+        return "forward:/booksPage";
+    }
+
+    private Book byteToBase64Image(Book book) {
+        book.setImageBase64("data:image/png;base64," + Base64.getEncoder().encodeToString(book.getImage()));
+        return book;
     }
 }

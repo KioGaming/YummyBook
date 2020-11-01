@@ -36,7 +36,7 @@
                     <a th:href="@{/deleteBook(bookId=${book.id})}">
                         <img src="images/delete.png" th:alt="#{delete}" class="delete-icon"/>
                     </a>
-                    <a href="/index">
+                    <a th:href="@{/editBook(bookId=${book.id})}">
                         <img src="images/edit.png" th:alt="#{edit}" class="edit-icon"/>
                     </a>
                 </div>

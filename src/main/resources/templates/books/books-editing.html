@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="#{online_library}">YummyBook</title>
+    <link th:href="@{../../static/css/dialog.css}" rel="stylesheet"/>
+    <link th:href="@{../../static/css/books.css}" rel="stylesheet"/>
+    <link th:href="@{../../static/css/footer.css}" rel="stylesheet"/>
+</head>
+
+<body>
+
+<div th:fragment="books-editing">
+    <div id="dialogEditBook" style="width: 750px">
+
+        <div id="formEditBook">
+
+            <div class="popup-info">
+                <form class="avatar-box" action="/saveBook" method="post">
+                    <div class="avatar-box">
+
+
+                        <!-- загрузка обложки книги -->
+                        <img width="240" height="320" id="bookImage" th:src="${book.imageBase64}"/>
+
+                        <input type="file" name="bookImage" accept="image/jpeg,image/png" id="imageUpload"/>
+
+
+                    </div>
+
+                    <div>
+                        <div class="block">
+                            <p th:text="#{subj_name}"></p>
+
+                            <div>
+                                <input type="text" size="40" id="inputBookName" name="bookName" th:value="${book.name}" required/>
+                            </div>
+                        </div>
+
+
+                        <div class="block">
+                            <p th:text="#{author}"></p>
+
+                            <div>
+                                <select id="authorList" name="bookAuthor">
+                                    <option selected th:text="${book.author}" th:value="${book.author}" ></option>
+                                    <option th:each="author, iStat : ${authorList}" th:text="${author.fio}" th:value="${author.fio}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="block">
+                            <p th:text="#{genre}"></p>
+
+                            <div>
+                                <select id="genreList" name="bookGenre">
+                                    <option selected th:text="${book.genre}" th:value="${book.genre}"></option>
+                                    <option th:each="genre, iStat : ${genreList}" th:text="${genre.name}"  th:value="${genre.name}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="block">
+                            <p th:text="#{publisher}"></p>
+
+                            <div>
+                                <select id="publisherList" name="bookPublisher">
+                                    <option selected th:text="${book.publisher}" th:value="${book.publisher}"></option>
+                                    <option th:each="publisher, iStat : ${publisherList}" th:text="${publisher.name}" th:value="${publisher.name}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="block">
+                            <p>ISBN</p>
+
+                            <div>
+                            <input type="text" size="40" id="isbn" name="bookISBN" th:value="${book.isbn}" required/>
+                            </div>
+                        </div>
+
+
+                        <div class="block">
+                            <p th:text="#{year}"></p>
+
+                            <div>
+                                <input type="number" min="0" max="2025" id="year" name="bookYear" th:value="${book.publishYear}" required/>
+                            </div>
+                        </div>
+
+
+                        <div class="block">
+                            <p th:text="#{page_count}"></p>
+
+                            <div>
+                                <input type="number" min="0" max="10000" id="page_count" name="bookPageCount" th:value="${book.pageCount}" required/>
+                            </div>
+                        </div>
+
+
+                        <div class="block">
+                            <p th:text="#{content}"></p>
+
+                            <div>
+                                <div class="loaded">
+
+                                    <!-- загрузка PDF контента -->
+                                    <input type="file" name="bookImage" accept="application/pdf" id="contentUpload"/>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="block">
+                            <p th:text="#{descr}"></p>
+                            <textarea cols="30" id="descr" th:value="${book.descr}"></textarea>
+                            <div>
+                                <input type="submit" th:value="#{save}"/>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </form>
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+
+</html>
