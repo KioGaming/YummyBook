@@ -17,7 +17,7 @@
         <div id="formEditBook">
 
             <div class="popup-info">
-                <form class="avatar-box" action="/saveBook" method="post">
+                <form enctype="multipart/form-data" class="avatar-box" action="/saveBook" method="post">
                     <div class="avatar-box">
 
 
@@ -30,6 +30,13 @@
                     </div>
 
                     <div>
+                        <div class="block">
+                            <p th:text="ID"></p>
+
+                            <div>
+                                <input type="number" size="40" id="inputBookId" name="bookId" th:value="${book.id}" required/>
+                            </div>
+                        </div>
                         <div class="block">
                             <p th:text="#{subj_name}"></p>
 
@@ -44,8 +51,8 @@
 
                             <div>
                                 <select id="authorList" name="bookAuthor">
-                                    <option selected th:text="${book.author}" th:value="${book.author}" ></option>
-                                    <option th:each="author, iStat : ${authorList}" th:text="${author.fio}" th:value="${author.fio}"></option>
+                                    <option selected th:text="${book.author.fio}" th:value="${book.author.id}" ></option>
+                                    <option th:each="author, iStat : ${authorList}" th:text="${author.fio}" th:value="${author.id}"></option>
                                 </select>
                             </div>
                         </div>
@@ -56,8 +63,8 @@
 
                             <div>
                                 <select id="genreList" name="bookGenre">
-                                    <option selected th:text="${book.genre}" th:value="${book.genre}"></option>
-                                    <option th:each="genre, iStat : ${genreList}" th:text="${genre.name}"  th:value="${genre.name}"></option>
+                                    <option selected th:text="${book.genre}" th:value="${book.genre.id}"></option>
+                                    <option th:each="genre, iStat : ${genreList}" th:text="${genre.name}"  th:value="${genre.id}"></option>
                                 </select>
                             </div>
                         </div>
@@ -68,8 +75,8 @@
 
                             <div>
                                 <select id="publisherList" name="bookPublisher">
-                                    <option selected th:text="${book.publisher}" th:value="${book.publisher}"></option>
-                                    <option th:each="publisher, iStat : ${publisherList}" th:text="${publisher.name}" th:value="${publisher.name}"></option>
+                                    <option selected th:text="${book.publisher}" th:value="${book.publisher.id}"></option>
+                                    <option th:each="publisher, iStat : ${publisherList}" th:text="${publisher.name}" th:value="${publisher.id}"></option>
                                 </select>
                             </div>
                         </div>
@@ -109,7 +116,7 @@
                                 <div class="loaded">
 
                                     <!-- загрузка PDF контента -->
-                                    <input type="file" name="bookImage" accept="application/pdf" id="contentUpload"/>
+                                    <input type="file" name="bookContent" accept="application/pdf" id="contentUpload" th:value="${book.content}"/>
 
                                 </div>
 
@@ -119,12 +126,40 @@
 
                         <div class="block">
                             <p th:text="#{descr}"></p>
-                            <textarea cols="30" id="descr" th:value="${book.descr}"></textarea>
+                            <textarea cols="30" id="descr" th:value="${book.descr}" name="bookDescr"></textarea>
                             <div>
                                 <input type="submit" th:value="#{save}"/>
                             </div>
                         </div>
 
+                        <div class="block">
+                            <p th:text="viewCount"></p>
+
+                            <div>
+                                <input type="number" size="40" name="bookViewCount" th:value="${book.viewCount}" required/>
+                            </div>
+                        </div>
+                        <div class="block">
+                            <p th:text="totalRating"></p>
+
+                            <div>
+                                <input type="number" size="40" name="bookTotalRating" th:value="${book.totalRating}" required/>
+                            </div>
+                        </div>
+                        <div class="block">
+                            <p th:text="totalVoteCount"></p>
+
+                            <div>
+                                <input type="number" size="40" name="bookTotalVoteCount" th:value="${book.totalVoteCount}" required/>
+                            </div>
+                        </div>
+                        <div class="block">
+                            <p th:text="avgRating"></p>
+
+                            <div>
+                                <input type="number" size="40" name="bookAvgRating" th:value="${book.avgRating}" required/>
+                            </div>
+                        </div>
 
                     </div>
                 </form>

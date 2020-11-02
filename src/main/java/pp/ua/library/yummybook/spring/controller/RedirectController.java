@@ -9,14 +9,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import pp.ua.library.yummybook.dao.AuthorDao;
 import pp.ua.library.yummybook.dao.BookDao;
 import pp.ua.library.yummybook.dao.GenreDao;
 import pp.ua.library.yummybook.dao.PublisherDao;
+import pp.ua.library.yummybook.domain.Author;
 import pp.ua.library.yummybook.domain.Book;
 import pp.ua.library.yummybook.domain.Genre;
+import pp.ua.library.yummybook.domain.Publisher;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -140,7 +144,51 @@ public class RedirectController {
     }
 
     @RequestMapping(value = {"/saveBook"})
-    public String saveBook() {
+    public String saveBook(@RequestParam("bookId") Optional<Long> bookId,
+                           @RequestParam("bookImage") MultipartFile bookImage,
+                           @RequestParam("bookName") Optional<String> bookName,
+                           @RequestParam("bookAuthor") Optional<Long> bookAuthor,
+                           @RequestParam("bookGenre") Optional<Long> bookGenre,
+                           @RequestParam("bookPublisher") Optional<Long> bookPublisher,
+                           @RequestParam("bookISBN") Optional<String> bookISBN,
+                           @RequestParam("bookYear") Optional<Integer> bookYear,
+                           @RequestParam("bookPageCount") Optional<Integer> bookPageCount,
+                           @RequestParam("bookContent") MultipartFile bookContent,
+                           @RequestParam("bookDescr") Optional<String> bookDescr,
+                           @RequestParam("bookViewCount") Optional<Long> bookViewCount,
+                           @RequestParam("bookTotalRating") Optional<Long> bookTotalRating,
+                           @RequestParam("bookTotalVoteCount") Optional<Long> bookTotalVoteCount,
+                           @RequestParam("bookAvgRating") Optional<Integer> bookAvgRating) {
+
+        if(bookId.isPresent() && bookName.isPresent() && bookAuthor.isPresent() && bookGenre.isPresent()
+                && bookPublisher.isPresent() && bookISBN.isPresent() && bookYear.isPresent() && bookPageCount.isPresent()
+                && bookDescr.isPresent() && bookViewCount.isPresent() && bookTotalRating.isPresent()
+                && bookTotalVoteCount.isPresent() && bookAvgRating.isPresent()) {
+            Genre genre = genreDao.get(bookGenre.get());
+            Author author = authorDao.get(bookAuthor.get());
+            Publisher publisher = publisherDao.get(bookPublisher.get());
+            byte[] image;
+            if(!bookImage.isEmpty()){
+                try {
+                    image = bookImage.getBytes();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    image = bookDao.get(bookId.get()).getImage();
+                }
+            } else {
+                image = bookDao.get(bookId.get()).getImage();
+            }
+            Book book = new Book(bookId.get(), bookName.get(), bookPageCount.get(), bookISBN.get(), genre, author, publisher, bookYear.get(), image, bookDescr.get(), bookViewCount.get(), bookTotalRating.get(), bookTotalVoteCount.get(), bookAvgRating.get());
+            if(!bookContent.isEmpty()){
+                try {
+                    book.setContent(bookContent.getBytes());
+                } catch (IOException e) {
+                    book.setContent(null);
+                    e.printStackTrace();
+                }
+            }
+            bookDao.save(book);
+        }
         return "forward:/booksPage";
     }
 
