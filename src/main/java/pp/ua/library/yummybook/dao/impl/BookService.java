@@ -47,9 +47,9 @@ public class BookService implements BookDao {
 
     @Override
     public Book save(Book book) {
-        bookRepository.save(book);
+        Book newBook = bookRepository.save(book);
         if (book.getContent() != null) {
-            bookRepository.updateContent(book.getContent(), book.getId());
+            bookRepository.updateContent(newBook.getContent(), newBook.getId());
         }
         return book;
     }
