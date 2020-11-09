@@ -199,8 +199,36 @@ public class RedirectController {
         return "forward:/booksPage";
     }
 
-    private Book byteToBase64Image(Book book) {
+    @RequestMapping(value = {"/voting"})
+    public String voting(@RequestParam("bookId") Optional<Long> bookId, @RequestParam("votedValue") Optional<Long> votedValue) {
+        if(bookId.isPresent() && votedValue.isPresent()) {
+            Book book = bookDao.get(bookId.get());
+
+            // какой рейтинг поставил пользователь
+            long currentRating = votedValue.get();
+
+            // новый рейтинг (суммарный)
+            long newRating = book.getTotalRating() + currentRating;
+
+            // сколько проголосовало
+            long newVoteCount = book.getTotalVoteCount() + 1;
+
+            // среднее значение, которое показывается на странице
+            int newAvgRating = calcAverageRating(newRating, newVoteCount);
+
+            bookDao.updateRating(newRating, newVoteCount, newAvgRating, book.getId());
+        }
+        return "forward:/booksPage";
+    }
+
+    public int calcAverageRating(long totalRating, long totalVoteCount) {
+        if (totalRating == 0 || totalVoteCount == 0) {
+            return 0;
+        }
+        return Long.valueOf(totalRating / totalVoteCount).intValue();
+    }
+
+    private void byteToBase64Image(Book book) {
         book.setImageBase64("data:image/png;base64," + Base64.getEncoder().encodeToString(book.getImage()));
-        return book;
     }
 }
