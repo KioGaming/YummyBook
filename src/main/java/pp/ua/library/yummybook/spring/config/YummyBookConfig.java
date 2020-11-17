@@ -1,4 +1,4 @@
-package pp.ua.library.yummybook.spring;
+package pp.ua.library.yummybook.spring.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

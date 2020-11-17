@@ -34,7 +34,7 @@
                         <span th:text="${book.avgRating}" class="main-rating"></span-->
                         <!--рейтинг начинается тут-->
                         <div itemscope="" itemtype="http://schema.org/CollectionPage" class="ratingHolder" th:attr="id=${book.id}">
-                            <div class="userRatingHolder">
+                            <div class="userRatingHolder" sec:authorize="isAuthenticated()">
                                 <div class="userRating">
                                     <div class="votingHolder">
                                         <div data-score="5" class="vote onestar"></div>
@@ -65,8 +65,7 @@
                             </div>
                         </div>
                     </div>
-                    <!--div class="admin-region" sec:authorize="hasAuthority('ADMIN')"-->
-                    <div class="admin-region">
+                    <div class="admin-region" sec:authorize="hasAuthority('ROLE_ADMIN')">
                         <a th:href="@{/deleteBook(bookId=${book.id})}">
                             <img src="images/delete.png" th:alt="#{delete}" class="delete-icon"/>
                         </a>
@@ -130,13 +129,7 @@
                 $.ajax({
                     url: '/voting',
                     method: 'POST',
-                    data: {votedValue: votedValue, bookId: bookId}, // можно было обойтись без variable, но это просто пример
-                    success: function(data) {
-                        alert('Удалено');
-                    },
-                    error:  function(xhr, str){
-                        alert('Возникла ошибка: ' + xhr.responseCode);
-                    }
+                    data: {votedValue: votedValue, bookId: bookId}
                 });
             })
         })

@@ -11,7 +11,7 @@
 
     <a th:href="@{/booksPage}"><img src="images/books.png" style="height:60px; padding:10px;  margin-left: 10%;"/></a>
 
-    <!--Add button - add book-->
+    <a sec:authorize="hasAuthority('ROLE_ADMIN')" style="color:#dd993a; text-decoration: none; left: 20%; position: absolute; top: 20px" th:text="#{add_book}" th:href="@{/addBook}"></a>
 
     <select id="locales"
             style="color:#a0a0a0; width: 175px; font-size: 14px !important; position: absolute; top: 10px; margin-left: 25%;">
@@ -39,7 +39,9 @@
     <output th:text="#{welcome}"
             style=" color:lightgray; font-size: 14px; font-weight: normal; padding-top: 15px; position: absolute; top: 5px; margin-left: 65%;;"></output>
 
-    <a th:text="#{logout}" th:href="@{/logout}"
+    <a sec:authorize="isAuthenticated()" th:text="#{logout}" th:href="@{/logout}"
+       style="color:#dd993a; text-decoration: none; position: absolute; top: 20px; margin-left: 75%;"></a>
+    <a sec:authorize="!isAuthenticated()" th:text="#{login}" th:href="@{/index}"
        style="color:#dd993a; text-decoration: none; position: absolute; top: 20px; margin-left: 75%;"></a>
 
 </header>

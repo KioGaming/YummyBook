@@ -4,22 +4,30 @@
 <head>
     <meta charset="UTF-8"/>
     <title th:text="#{online_library}">YummyBook</title>
-    <link th:href="@{css/dialog.css}" rel="stylesheet" />
-    <link th:href="@{css/books.css}" rel="stylesheet" />
-    <link th:href="@{css/footer.css}" rel="stylesheet" />
+    <link th:href="@{css/index.css}" rel="stylesheet"/>
 </head>
 
 <body>
 
-<header th:replace="~{books/books-header :: books-header}"></header>
+<div id="login">
 
-<div th:replace="~{books/books-top :: books-top}"></div>
+    <form id="login_form" action="/index" method="post">
+        <p th:if="${loginError}" class="error">Wrong user or password</p>
+        <span class="fontawesome-user"></span>
+        <input
+                type="text" id="username" name="username" class="ui-corner-all"
+                required="required" placeholder="username"/>
 
-<div th:replace="~{books/books-leftmenu :: books-leftmenu}"></div>
+        <span class="fontawesome-lock"></span>
+        <input type="password" id="password" name="password"
+               class="ui-corner-all" required="required" placeholder="password"/>
 
-<div th:replace="~{books/books-template :: books-template}"></div>
 
-<footer th:replace="~{books/books-footer :: books-footer}"></footer>
+        <input type="submit" th:text="#{login}"/>
+
+    </form>
+
+</div>
 
 </body>
 

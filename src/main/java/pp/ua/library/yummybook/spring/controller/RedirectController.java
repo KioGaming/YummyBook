@@ -4,6 +4,7 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,7 +42,7 @@ public class RedirectController {
     @Autowired
     PublisherDao publisherDao;
 
-    @RequestMapping(value = {"", "/booksPage"})
+    @RequestMapping(value = {"/booksPage", "", "/"})
     public String baseUrlRedirect(Model model,
                                   @RequestParam("page") Optional<Integer> page,
                                   @RequestParam("size") Optional<Integer> size,
@@ -97,9 +98,10 @@ public class RedirectController {
         model.addAttribute("topBookList", topBooks);
         model.addAttribute("genreList", genreList);
 
-        return "index";
+        return "mainPage";
     }
 
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = {"/getBook"})
     public String getBook(HttpServletRequest request, @RequestParam("bookId") Optional<Long> bookId) {
         if (bookId.isPresent()) {
@@ -113,12 +115,14 @@ public class RedirectController {
         //добавить страничку ошибки
     }
 
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = {"/openBook"}, produces = "application/pdf")
     @ResponseBody
     public byte[] openBook(HttpServletRequest request) {
         return (byte[]) request.getAttribute("bookContent");
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = {"/deleteBook"})
     public String deleteBook(@RequestParam("bookId") Optional<Long> bookId) {
         if(bookId.isPresent()) {
@@ -127,6 +131,7 @@ public class RedirectController {
         return "forward:/booksPage";
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = {"/editBook"})
     public String editBook(@RequestParam("bookId") Optional<Long> bookId, Model model) {
         if(bookId.isPresent()) {
@@ -143,6 +148,7 @@ public class RedirectController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = {"/addBook"})
     public String addBook(Model model) {
         model.addAttribute("authorList", authorDao.getAll());
@@ -152,6 +158,7 @@ public class RedirectController {
         return "addingPage";
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = {"/saveBook"})
     public String saveBook(@RequestParam("bookId") Optional<Long> bookId,
                            @RequestParam("bookImage") MultipartFile bookImage,
@@ -199,6 +206,7 @@ public class RedirectController {
         return "forward:/booksPage";
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
     @RequestMapping(value = {"/voting"})
     public String voting(@RequestParam("bookId") Optional<Long> bookId, @RequestParam("votedValue") Optional<Long> votedValue) {
         if(bookId.isPresent() && votedValue.isPresent()) {
@@ -219,6 +227,17 @@ public class RedirectController {
             bookDao.updateRating(newRating, newVoteCount, newAvgRating, book.getId());
         }
         return "forward:/booksPage";
+    }
+
+    @RequestMapping(value = {"/index"})
+    public String index() {
+        return "index";
+    }
+
+    @RequestMapping("/login-error")
+    public String loginError(Model model) {
+        model.addAttribute("loginError", true);
+        return "index";
     }
 
     public int calcAverageRating(long totalRating, long totalVoteCount) {
