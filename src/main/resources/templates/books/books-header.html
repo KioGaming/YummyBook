@@ -42,8 +42,9 @@
     <a sec:authorize="isAuthenticated()" th:text="#{logout}" th:href="@{/logout}"
        style="color:#dd993a; text-decoration: none; position: absolute; top: 20px; margin-left: 75%;"></a>
     <a sec:authorize="!isAuthenticated()" th:text="#{login}" th:href="@{/index}"
-       style="color:#dd993a; text-decoration: none; position: absolute; top: 20px; margin-left: 75%;"></a>
-
+       style="color:#dd993a; text-decoration: none; position: absolute; top: 20px; margin-left: 74%;"></a>
+    <a sec:authorize="!isAuthenticated()" th:text="Зареєструватися" th:href="@{/singUp}"
+       style="color:#dd993a; text-decoration: none; position: absolute; top: 20px; margin-left: 78%;"></a>
 </header>
 
 </body>

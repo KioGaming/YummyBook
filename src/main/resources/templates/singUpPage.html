@@ -11,9 +11,9 @@
 
 <div id="login">
 
-    <form id="login_form" action="/index" method="post">
+    <form id="login_form" action="/registration" method="post">
+        <h1 th:text="Реєстрація"></h1>
         <p th:if="${loginError}" class="error">Wrong user or password</p>
-        <p th:if="${loginAfterRegistration}" class="error">Enter data from the account you just created</p>
         <span class="fontawesome-user"></span>
         <input
                 type="text" id="username" name="username" class="ui-corner-all"
