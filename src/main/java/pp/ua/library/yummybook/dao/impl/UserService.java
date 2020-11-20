@@ -20,8 +20,8 @@ public class UserService implements UserDao {
     private UserRepository userRepository;
 
     @Override
-    public List<User> findByUsername(String username) {
-        return userRepository.findByUsernameOrderByUsername(username);
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     @Override

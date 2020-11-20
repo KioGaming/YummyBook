@@ -220,22 +220,26 @@ public class RedirectController {
             // какой рейтинг поставил пользователь
             long currentRating = votedValue.get();
 
-            // новый рейтинг (суммарный)
-            long newRating = book.getTotalRating() + currentRating;
-
             // сколько проголосовало
             long newVoteCount = book.getTotalVoteCount() + 1;
 
-            // среднее значение, которое показывается на странице
-            int newAvgRating = calcAverageRating(newRating, newVoteCount);
+            int lastValue = 0;
+
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             String username = auth.getName();
             Vote vote = voteDao.getVote(bookId.get(), username);
             if(vote == null){
                 voteDao.save(new Vote((int) currentRating, bookId.get(), username));
             } else {
+                lastValue = vote.getValue();
+                newVoteCount--;
                 voteDao.save(new Vote(vote.getId(), (int) currentRating, bookId.get(), username));
             }
+            // новый рейтинг (суммарный)
+            long newRating = book.getTotalRating() + currentRating - lastValue;
+
+            // среднее значение, которое показывается на странице
+            int newAvgRating = calcAverageRating(newRating, newVoteCount);
             bookDao.updateRating(newRating, newVoteCount, newAvgRating, book.getId());
         }
         return "forward:/booksPage";
@@ -261,7 +265,7 @@ public class RedirectController {
     @PreAuthorize("!isAuthenticated()")
     @RequestMapping(value = {"/registration"})
     public String registration(@RequestParam("username") Optional<String> username, @RequestParam("password") Optional<String> password, Model model) {
-        if (password.isPresent() && username.isPresent() && userDao.findByUsername(username.get()).size() == 0) {
+        if (password.isPresent() && username.isPresent() && userDao.findByUsername(username.get()) == null) {
             userDao.save(new User(username.get(), passwordEncoder.encode(password.get())));
             userRoleDao.save(new UserRole(username.get()));
             model.addAttribute("loginAfterRegistration", true);
