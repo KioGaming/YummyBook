@@ -8,7 +8,6 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(catalog = "library")
@@ -24,11 +23,27 @@ public class Vote {
     @Id
     private Long id;
 
-    private String value;
+    private int value;
 
     @Column(name = "book_id")
-    private Date bookId;
+    private Long bookId;
 
     private String username;
 
+    public Vote(Long id, int value, Long bookId, String username){
+        this.id = id;
+        this.value = value;
+        this.bookId = bookId;
+        this.username = username;
+    }
+
+    public Vote(int value, Long bookId, String username){
+        this.value = value;
+        this.bookId = bookId;
+        this.username = username;
+    }
+
+    public Vote(){
+
+    }
 }

@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,6 +42,8 @@ public class RedirectController {
     UserDao userDao;
     @Autowired
     UserRoleDao userRoleDao;
+    @Autowired
+    VoteDao voteDao;
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -128,9 +132,7 @@ public class RedirectController {
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = {"/deleteBook"})
     public String deleteBook(@RequestParam("bookId") Optional<Long> bookId) {
-        if (bookId.isPresent()) {
-            bookDao.delete(bookDao.get(bookId.get()));
-        }
+        bookId.ifPresent(aLong -> bookDao.delete(bookDao.get(aLong)));
         return "forward:/booksPage";
     }
 
@@ -226,7 +228,14 @@ public class RedirectController {
 
             // среднее значение, которое показывается на странице
             int newAvgRating = calcAverageRating(newRating, newVoteCount);
-
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            String username = auth.getName();
+            Vote vote = voteDao.getVote(bookId.get(), username);
+            if(vote == null){
+                voteDao.save(new Vote((int) currentRating, bookId.get(), username));
+            } else {
+                voteDao.save(new Vote(vote.getId(), (int) currentRating, bookId.get(), username));
+            }
             bookDao.updateRating(newRating, newVoteCount, newAvgRating, book.getId());
         }
         return "forward:/booksPage";
