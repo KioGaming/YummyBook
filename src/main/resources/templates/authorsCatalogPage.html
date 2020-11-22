@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="#{online_library}">YummyBook</title>
+    <link th:href="@{css/dialog.css}" rel="stylesheet" />
+    <link th:href="@{css/books.css}" rel="stylesheet" />
+    <link th:href="@{css/footer.css}" rel="stylesheet" />
+</head>
+
+<body>
+
+<header th:replace="~{books/books-header :: books-header}"></header>
+
+<div th:replace="~{books/authorsCatalogTemplate :: authorsCatalogTemplate}"></div>
+
+<footer th:replace="~{books/books-footer :: books-footer}"></footer>
+
+</body>
+
+</html>

@@ -286,4 +286,104 @@ public class RedirectController {
     private void byteToBase64Image(Book book) {
         book.setImageBase64("data:image/png;base64," + Base64.getEncoder().encodeToString(book.getImage()));
     }
+
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = {"/catalogs"})
+    public String getCatalog(@RequestParam("catalog") Optional<String> catalog,
+                             @RequestParam("page") Optional<Integer> page,
+                             @RequestParam("size") Optional<Integer> size,
+                             Model model) {
+        if (catalog.isPresent()) {
+            int currentPage = page.orElse(1) - 1;
+            int pageSize = size.orElse(20);
+            if (pageSize != 10 && pageSize != 15 && pageSize != 20 && pageSize != 30) pageSize = 20;
+            Sort.Direction sortDirection = Sort.Direction.ASC;
+
+            model.addAttribute("selectedCatalog", catalog.get());
+            if(catalog.get().equals("authors")){
+                Page<Author> authors = authorDao.getAll(currentPage, pageSize, "fio", sortDirection);
+                model.addAttribute("authors", authors);
+                model.addAttribute("totalPages", authors.getTotalPages());
+                if (authors.getTotalPages() > 0) {
+                    List<Integer> pageNumbers = IntStream.rangeClosed(1, authors.getTotalPages()).boxed().collect(Collectors.toList());
+                    model.addAttribute("pageNumbers", pageNumbers);
+                }
+                model.addAttribute("size", authors.getSize());
+                model.addAttribute("number", authors.getSize());
+                return "authorsCatalogPage";
+            } else if(catalog.get().equals("genres")){
+                Page<Genre> genres = genreDao.getAll(currentPage, pageSize, "name", sortDirection);
+                model.addAttribute("genres", genres);
+                model.addAttribute("totalPages", genres.getTotalPages());
+                if (genres.getTotalPages() > 0) {
+                    List<Integer> pageNumbers = IntStream.rangeClosed(1, genres.getTotalPages()).boxed().collect(Collectors.toList());
+                    model.addAttribute("pageNumbers", pageNumbers);
+                }
+                model.addAttribute("size", genres.getSize());
+                model.addAttribute("number", genres.getSize());
+                return "genresCatalogPage";
+            } else if(catalog.get().equals("publishers")){
+                Page<Publisher> publishers = publisherDao.getAll(currentPage, pageSize, "name", sortDirection);
+                model.addAttribute("publishers", publishers);
+                model.addAttribute("totalPages", publishers.getTotalPages());
+                if (publishers.getTotalPages() > 0) {
+                    List<Integer> pageNumbers = IntStream.rangeClosed(1, publishers.getTotalPages()).boxed().collect(Collectors.toList());
+                    model.addAttribute("pageNumbers", pageNumbers);
+                }
+                model.addAttribute("size", publishers.getSize());
+                model.addAttribute("number", publishers.getSize());
+                return "publishersCatalogPage";
+            }
+        }
+        return "forward:/booksPage";
+    }
+
+    /*@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = {"/editAuthor"})
+    public String editAuthor(@RequestParam("authorId") Optional<Long> authorId,
+                             Model model) {
+        return "forward:/booksPage";
+    }
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = {"/editGenre"})
+    public String editGenre(@RequestParam("genreId") Optional<Long> genreId,
+                             Model model) {
+        return "forward:/booksPage";
+    }
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = {"/editPublisher"})
+    public String editPublisher(@RequestParam("publisherId") Optional<Long> publisherId,
+                             Model model) {
+        return "forward:/booksPage";
+    }*/
+    /*@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = {"/deleteAuthor"})
+    public String deleteAuthor(@RequestParam("authorId") Optional<Long> authorId) {
+        return "forward:/booksPage";
+    }
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = {"/deleteGenre"})
+    public String deleteGenre(@RequestParam("genreId") Optional<Long> genreId) {
+        return "forward:/booksPage";
+    }
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = {"/deletePublisher"})
+    public String deletePublisher(@RequestParam("publisherId") Optional<Long> publisherId) {
+        return "forward:/booksPage";
+    }*/
+    /*@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = {"/addAuthor"})
+    public String addAuthor() {
+        return "forward:/booksPage";
+    }
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = {"/addGenre"})
+    public String addGenre() {
+        return "forward:/booksPage";
+    }
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = {"/addPublisher"})
+    public String addPublisher() {
+        return "forward:/booksPage";
+    }*/
 }
