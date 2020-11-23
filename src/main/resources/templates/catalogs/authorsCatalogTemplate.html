@@ -12,6 +12,8 @@
 <body>
 
 <div th:fragment="authorsCatalogTemplate">
+    <a th:href="@{/editAuthor}"
+       style="color:#dd993a; text-decoration: none;">Додати автора</a>
     <table border="1" style="margin-left: 25%">
         <tbody>
         <tr th:each="author, iStat : ${authors}">

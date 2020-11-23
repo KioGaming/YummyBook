@@ -12,6 +12,8 @@
 <body>
 
 <div th:fragment="genresCatalogTemplate">
+    <a th:href="@{/editGenre}"
+       style="color:#dd993a; text-decoration: none;">Додати жанр</a>
     <table border="1" style="margin-left: 25%">
         <tbody>
         <tr th:each="genre, iStat : ${genres}">

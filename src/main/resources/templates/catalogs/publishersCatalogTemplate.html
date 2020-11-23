@@ -12,6 +12,8 @@
 <body>
 
 <div th:fragment="publishersCatalogTemplate">
+    <a th:href="@{/editPublisher}"
+       style="color:#dd993a; text-decoration: none;">Додати видавництво</a>
     <table border="1" style="margin-left: 25%">
         <tbody>
         <tr th:each="publisher, iStat : ${publishers}">

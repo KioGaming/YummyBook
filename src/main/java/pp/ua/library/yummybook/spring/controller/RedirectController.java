@@ -4,6 +4,7 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +20,8 @@ import pp.ua.library.yummybook.domain.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -338,52 +341,95 @@ public class RedirectController {
         return "forward:/booksPage";
     }
 
-    /*@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = {"/deleteAuthor"})
+    public String deleteAuthor(@RequestParam("authorId") Optional<Long> authorId) {
+        if(authorId.isPresent()) {
+            Author author = authorDao.get(authorId.get());
+            if(author.getBooks().size() == 0) {
+                authorDao.delete(authorDao.get(authorId.get()));
+            }
+        }
+        return "redirect:/catalogs?catalog=authors";
+    }
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = {"/deleteGenre"})
+    public String deleteGenre(@RequestParam("genreId") Optional<Long> genreId) {
+        if(genreId.isPresent()) {
+            Genre genre = genreDao.get(genreId.get());
+            if(genre.getBooks().size() == 0) {
+                genreDao.delete(genreDao.get(genreId.get()));
+            }
+        }
+        return "redirect:/catalogs?catalog=genres";
+    }
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = {"/deletePublisher"})
+    public String deletePublisher(@RequestParam("publisherId") Optional<Long> publisherId) {
+        if(publisherId.isPresent()) {
+            Publisher publisher = publisherDao.get(publisherId.get());
+            if(publisher.getBooks().size() == 0) {
+                publisherDao.delete(publisherDao.get(publisherId.get()));
+            }
+        }
+        return "redirect:/catalogs?catalog=publishers";
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = {"/editAuthor"})
     public String editAuthor(@RequestParam("authorId") Optional<Long> authorId,
                              Model model) {
-        return "forward:/booksPage";
+        if (authorId.isPresent()){
+            Author author = authorDao.get(authorId.get());
+            model.addAttribute("author", author);
+            model.addAttribute("date", author.getBirthday().toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDateTime());
+        }
+        return "catalogs/editAuthor";
     }
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = {"/editGenre"})
     public String editGenre(@RequestParam("genreId") Optional<Long> genreId,
                              Model model) {
-        return "forward:/booksPage";
+        genreId.ifPresent(aLong -> model.addAttribute("genre", genreDao.get(aLong)));
+        return "catalogs/editGenre";
     }
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = {"/editPublisher"})
     public String editPublisher(@RequestParam("publisherId") Optional<Long> publisherId,
                              Model model) {
-        return "forward:/booksPage";
-    }*/
-    /*@PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @RequestMapping(value = {"/deleteAuthor"})
-    public String deleteAuthor(@RequestParam("authorId") Optional<Long> authorId) {
+        publisherId.ifPresent(aLong -> model.addAttribute("publisher", publisherDao.get(aLong)));
+        return "catalogs/editPublisher";
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = {"/saveAuthor"})
+    public String saveAuthor(@RequestParam("authorId") Optional<Long> authorId,
+                             @RequestParam("authorFio") Optional<String> authorFio,
+                             @RequestParam("authorBirthday") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+                                         Optional<LocalDateTime> authorBirthday) {
+        if(authorFio.isPresent() && authorBirthday.isPresent()){
+            Author author;
+            if(authorId.isPresent()){
+                author = authorDao.get(authorId.get());
+            } else {
+                author = new Author();
+            }
+            author.setFio(authorFio.get());
+            author.setBirthday(java.sql.Timestamp.valueOf(authorBirthday.get()));
+            authorDao.save(author);
+        }
+        return "redirect:/catalogs?catalog=authors";
+    }
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = {"/saveGenre"})
+    public String saveGenre() {
         return "forward:/booksPage";
     }
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @RequestMapping(value = {"/deleteGenre"})
-    public String deleteGenre(@RequestParam("genreId") Optional<Long> genreId) {
+    @RequestMapping(value = {"/savePublisher"})
+    public String savePublisher() {
         return "forward:/booksPage";
     }
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @RequestMapping(value = {"/deletePublisher"})
-    public String deletePublisher(@RequestParam("publisherId") Optional<Long> publisherId) {
-        return "forward:/booksPage";
-    }*/
-    /*@PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @RequestMapping(value = {"/addAuthor"})
-    public String addAuthor() {
-        return "forward:/booksPage";
-    }
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @RequestMapping(value = {"/addGenre"})
-    public String addGenre() {
-        return "forward:/booksPage";
-    }
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @RequestMapping(value = {"/addPublisher"})
-    public String addPublisher() {
-        return "forward:/booksPage";
-    }*/
 }
