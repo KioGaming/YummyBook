@@ -58,10 +58,6 @@ public class AuthorService implements AuthorDao {
     @Override
     public Author get(long id) {
         Optional<Author> bookmark = authorRepository.findById(id);
-        if (bookmark.isPresent()) {
-            return bookmark.get();
-        } else {
-            return null;
-        }
+        return bookmark.orElse(null);
     }
 }

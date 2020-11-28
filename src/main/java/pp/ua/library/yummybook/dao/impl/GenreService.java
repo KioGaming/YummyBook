@@ -60,10 +60,6 @@ public class GenreService implements GenreDao {
     @Override
     public Genre get(long id) {
         Optional<Genre> bookmark = genreRepository.findById(id);
-        if (bookmark.isPresent()) {
-            return bookmark.get();
-        } else {
-            return null;
-        }
+        return bookmark.orElse(null);
     }
 }

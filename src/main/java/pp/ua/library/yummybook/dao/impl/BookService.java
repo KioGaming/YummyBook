@@ -62,11 +62,7 @@ public class BookService implements BookDao {
     @Override
     public Book get(long id) {
         Optional<Book> bookmark = bookRepository.findById(id);
-        if (bookmark.isPresent()) {
-            return bookmark.get();
-        } else {
-            return null;
-        }
+        return bookmark.orElse(null);
     }
 
     @Override

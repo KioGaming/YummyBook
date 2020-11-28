@@ -17,19 +17,15 @@
     vertical-align: top;
 }
 
-/* Footer left */
-
 .footer-distributed .footer-left{
     width: 40%;
 }
 
-/* The company logo */
-
 .footer-distributed h3{
     color:  #ffffff;
     font: normal 26px 'Cookie', cursive;
-    margin: 0;
     font-family:'Sans serif';
+    margin: 0;
 }
 
 .footer-distributed h3 span{
@@ -38,25 +34,11 @@
 
 /* Footer links */
 
-.footer-distributed .footer-links{
-    color:  #ffffff;
-    margin: 20px 0 12px;
-    padding: 0;
-}
-
 .footer-distributed .footer-links a{
     display:inline-block;
     line-height: 1.8;
     text-decoration: none;
     color:  inherit;
-}
-
-.footer-distributed .footer-company-name{
-    color:  #8f9296;
-    font-size: 15px;
-    font-weight: normal;
-    margin: 20px;
-
 }
 
 /* Footer Center */
@@ -102,9 +84,6 @@
     text-decoration: none;;
 }
 
-
-/* Footer Right */
-
 .footer-distributed .footer-right{
     width: 20%;
 }
@@ -146,8 +125,6 @@
     margin-bottom: 5px;
 }
 
-/* If you don't want the footer to be responsive, remove these media queries */
-
 @media (max-width: 880px) {
 
     .footer-distributed{
@@ -166,5 +143,4 @@
     .footer-distributed .footer-center i{
         margin-left: 0;
     }
-
 }

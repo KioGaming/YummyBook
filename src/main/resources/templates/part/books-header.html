@@ -12,7 +12,7 @@
     <a th:href="@{/booksPage}"><img src="images/books.png" style="height:60px; padding:10px;  margin-left: 10%;"/></a>
 
     <select id="catalog" sec:authorize="hasAuthority('ROLE_ADMIN')"
-            style="color:#a0a0a0; width: 175px; font-size: 14px !important; position: absolute; top: 10px; margin-left: 13%;">
+            style="border-radius: 4px; color:#a0a0a0; width: 175px; font-size: 14px !important; position: absolute; top: 18px; margin-left: 13%;">
         <option th:text="#{dict}" value=""></option>
         <option th:text="#{authors}" value="authors"></option>
         <option th:text="#{genres}" value="genres"></option>
@@ -34,7 +34,7 @@
     <a sec:authorize="hasAuthority('ROLE_ADMIN')" style="color:#dd993a; text-decoration: none; left: 20%; position: absolute; top: 20px" th:text="#{add_book}" th:href="@{/addBook}"></a>
 
     <select id="locales"
-            style="color:#a0a0a0; width: 175px; font-size: 14px !important; position: absolute; top: 10px; margin-left: 25%;">
+            style="border-radius: 4px; color:#a0a0a0; width: 175px; font-size: 14px !important; position: absolute; top: 18px; margin-left: 25%;">
         <option th:text="#{lang.change}" value=""></option>
         <option th:text="#{ua}" value="ua"></option>
         <option th:text="#{en}" value="en"></option>

@@ -2,6 +2,7 @@ package pp.ua.library.yummybook.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,21 +43,21 @@ public class UserService implements UserDao {
 
     @Override
     public List<User> getAll(Sort sort) {
-        return null;
+        return userRepository.findAll(sort);
     }
 
     @Override
     public Page<User> getAll(int pageNumber, int pageSize, String sortField, Sort.Direction sortDirection) {
-        return null;
-    }
-
-    @Override
-    public Page<User> search(int pageNumber, int pageSize, String sortField, Sort.Direction sortDirection, String... searchString) {
-        return null;
+        return userRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.by(sortDirection, sortField)));
     }
 
     @Override
     public List<User> getAll() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public Page<User> search(int pageNumber, int pageSize, String sortField, Sort.Direction sortDirection, String... searchString) {
         return null;
     }
 

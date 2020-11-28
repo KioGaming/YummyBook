@@ -30,9 +30,6 @@
                         <h3 th:text="${book.author.fio}" class="book-author"></h3>
                         <img src="images/see.png" class="see-count"/>
                         <span th:text="${book.viewCount}" class="view-count"></span>
-                        <!--img src="images/star.png" class="avgRating"/>
-                        <span th:text="${book.avgRating}" class="main-rating"></span-->
-                        <!--рейтинг начинается тут-->
                         <div itemscope="" itemtype="http://schema.org/CollectionPage" class="ratingHolder" th:attr="id=${book.id}">
                             <div class="userRatingHolder" sec:authorize="isAuthenticated()">
                                 <div class="userRating">

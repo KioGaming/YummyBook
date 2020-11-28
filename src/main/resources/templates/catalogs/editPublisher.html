@@ -24,17 +24,17 @@
                             <p th:if="${publisher?.id}" th:text="ID"></p>
 
                             <div th:if="${publisher?.id}">
-                                <input type="number" size="40" name="genreId" th:value="${publisher.id}" required/>
+                                <input type="number" size="40" name="publisherId" th:value="${publisher.id}" required/>
                             </div>
                         </div>
                         <div class="block">
                             <p th:text="#{name}"></p>
 
                             <div th:if="${publisher?.name}">
-                                <input type="text" size="40" name="genreName" th:value="${publisher.name}" required/>
+                                <input type="text" size="40" name="publisherName" th:value="${publisher.name}" required/>
                             </div>
                             <div th:unless="${publisher?.name}">
-                                <input type="text" size="40" name="genreName" required/>
+                                <input type="text" size="40" name="publisherName" required/>
                             </div>
                         </div>
 

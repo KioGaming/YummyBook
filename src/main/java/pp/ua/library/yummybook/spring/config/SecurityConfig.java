@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter { // класс для настройки безопасности приложения
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private DataSource dataSource;
@@ -39,27 +39,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // класс
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        // настройка ограничений доступа к страницам
         http.authorizeRequests()
                 .antMatchers("/**").permitAll()
-                .antMatchers("/deleteBook").hasRole("ADMIN")// здесь автоматически будет добавлен префикс ROLE_,  поэтому указываем название роли без него
-                .antMatchers("/editBook").hasRole("ADMIN")// здесь автоматически будет добавлен префикс ROLE_,  поэтому указываем название роли без него
-                .antMatchers("/addBook").hasRole("ADMIN")// здесь автоматически будет добавлен префикс ROLE_,  поэтому указываем название роли без него
-                .antMatchers("/saveBook").hasRole("ADMIN")// здесь автоматически будет добавлен префикс ROLE_,  поэтому указываем название роли без него
+                .antMatchers("/deleteBook").hasRole("ADMIN")
+                .antMatchers("/editBook").hasRole("ADMIN")
+                .antMatchers("/addBook").hasRole("ADMIN")
+                .antMatchers("/saveBook").hasRole("ADMIN")
+                .antMatchers("/catalogs").hasRole("ADMIN")
+                .antMatchers("/deleteAuthor").hasRole("ADMIN")
+                .antMatchers("/deleteGenre").hasRole("ADMIN")
+                .antMatchers("/deletePublisher").hasRole("ADMIN")
+                .antMatchers("/editAuthor").hasRole("ADMIN")
+                .antMatchers("/editGenre").hasRole("ADMIN")
+                .antMatchers("/editPublisher").hasRole("ADMIN")
+                .antMatchers("/saveAuthor").hasRole("ADMIN")
+                .antMatchers("/saveGenre").hasRole("ADMIN")
+                .antMatchers("/savePublisher").hasRole("ADMIN")
 
-                .antMatchers("/getBook").hasAnyRole("ADMIN", "USER")// здесь автоматически будет добавлен префикс ROLE_,  поэтому указываем название роли без него
-                .antMatchers("/openBook").hasAnyRole("ADMIN", "USER")// здесь автоматически будет добавлен префикс ROLE_,  поэтому указываем название роли без него
-                .antMatchers("/voting").hasAnyRole("ADMIN", "USER")// здесь автоматически будет добавлен префикс ROLE_,  поэтому указываем название роли без него
+                .antMatchers("/getBook").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/openBook").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/voting").hasAnyRole("ADMIN", "USER")
 
                 .and()
 
-                .exceptionHandling().accessDeniedPage("/booksPage")// при ошибке доступа - будет перенправляться на страницу с книгами
+                .exceptionHandling().accessDeniedPage("/booksPage")
 
                 .and()
 
                 .csrf().disable()
 
-                // окно аутентификации
                 .formLogin()
                 .loginPage("/index")
                 .failureUrl("/login-error")
@@ -68,7 +76,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // класс
                 .usernameParameter("username")
                 .and()
 
-                // настройка выхода пользователя из системы
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/index")

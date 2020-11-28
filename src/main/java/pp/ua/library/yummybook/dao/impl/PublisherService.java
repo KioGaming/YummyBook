@@ -57,10 +57,6 @@ public class PublisherService implements PublisherDao {
     @Override
     public Publisher get(long id) {
         Optional<Publisher> bookmark = publisherRepository.findById(id);
-        if (bookmark.isPresent()) {
-            return bookmark.get();
-        } else {
-            return null;
-        }
+        return bookmark.orElse(null);
     }
 }
