@@ -1,0 +1,38 @@
+.topFiveBooks {
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.topFiveBooksText {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.topFiveBooksMd {
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.buttonOpenTopFiveBooks {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    background-color: #F4A460;
+    border-radius: 10px;
+}
+
+@media all and (max-width: 576px) {
+    .topFiveBooks {
+        width: 70%;
+        margin-right: 15%;
+        margin-left: 15%;
+    }
+
+    .buttonOpenTopFiveBooks {
+        font-size: 25px;
+    }
+}

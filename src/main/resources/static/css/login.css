@@ -1,0 +1,21 @@
+.formLogin {
+    color: white;
+    margin-top: 100px;
+    margin-right: 25px;
+    margin-left: 25px;
+}
+
+.formHeader {
+    text-align: center;
+}
+
+body, html, .loginSection {
+    height: 100%;
+}
+
+.buttonLogin {
+    width: 40%;
+    margin-top: 25px;
+    margin-left: 30%;
+    margin-right: 30%;
+}

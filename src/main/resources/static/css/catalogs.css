@@ -1,0 +1,19 @@
+.catalogsSection {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.table {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.outlineMargin {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.pagination {
+    margin-top: 35px;
+}

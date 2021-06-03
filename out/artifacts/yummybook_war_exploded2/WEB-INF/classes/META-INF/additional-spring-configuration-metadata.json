@@ -1,8 +1,0 @@
-{
-  "properties": [
-    {
-      "name": "spring.datasource.default-catalog",
-      "type": "java.lang.String",
-      "description": "Description for spring.datasource.default-catalog."
-  }
-] }

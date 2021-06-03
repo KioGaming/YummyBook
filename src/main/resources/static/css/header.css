@@ -1,0 +1,52 @@
+.headerLg {
+    height: 65px;
+}
+
+.logo {
+    height: 50px;
+}
+
+.inputFindBook {
+    margin: 6px;
+    width: 65%;
+}
+
+.buttonFindBook {
+    height: 30px;
+}
+
+.buttonAdminMenu {
+    height: 40px;
+}
+
+.parameterName {
+    margin-top: 10px;
+}
+
+.newBookImg {
+    margin-left: 15%;
+    margin-right: 15%;
+    width: 70%;
+}
+
+@media all and (max-width: 576px) {
+    .buttonLogin, .buttonRegister {
+        margin: 5px 0 5px 5px;
+    }
+
+    .inputFindBook {
+        width: 85%;
+    }
+
+    .selectLanguage {
+        margin: 10px 0 5px 5px;
+    }
+
+    .navbar-dark .navbar-toggler {
+        border: 0;
+    }
+
+    .buttonOpenAdditionalMenu {
+        margin-bottom: 10px;
+    }
+}
