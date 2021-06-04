@@ -366,19 +366,19 @@
                                         <div class="row">
                                             <div class="stars">
                                                 <form action="" th:data-score="*{id}">
-                                                    <input data-score="5" class="star star-5" th:id="*{'star-5-' + id}"
+                                                    <input data-score="5" class="star vote star-5" th:id="*{'star-5-' + id}"
                                                            type="radio" name="star"/>
                                                     <label class="star star-5" th:for="*{'star-5-' + id}"></label>
-                                                    <input data-score="4" class="star star-4" th:id="*{'star-4-' + id}"
+                                                    <input data-score="4" class="star vote star-4" th:id="*{'star-4-' + id}"
                                                            type="radio" name="star"/>
                                                     <label class="star star-4" th:for="*{'star-4-' + id}"></label>
-                                                    <input data-score="3" class="star star-3" th:id="*{'star-3-' + id}"
+                                                    <input data-score="3" class="star vote star-3" th:id="*{'star-3-' + id}"
                                                            type="radio" name="star"/>
                                                     <label class="star star-3" th:for="*{'star-3-' + id}"></label>
-                                                    <input data-score="2" class="star star-2" th:id="*{'star-2-' + id}"
+                                                    <input data-score="2" class="star vote star-2" th:id="*{'star-2-' + id}"
                                                            type="radio" name="star"/>
                                                     <label class="star star-2" th:for="*{'star-2-' + id}"></label>
-                                                    <input data-score="1" class="star star-1" th:id="*{'star-1-' + id}"
+                                                    <input data-score="1" class="star vote star-1" th:id="*{'star-1-' + id}"
                                                            type="radio" name="star"/>
                                                     <label class="star star-1" th:for="*{'star-1-' + id}"></label>
                                                 </form>
@@ -423,19 +423,19 @@
                                         <div class="row">
                                             <div class="stars">
                                                 <form action="" th:data-score="*{id}">
-                                                    <input data-score="5" class="star star-5" th:id="*{'star-5-' + id}"
+                                                    <input data-score="5" class="star vote star-5" th:id="*{'star-5-' + id}"
                                                            type="radio" name="star"/>
                                                     <label class="star star-5" th:for="*{'star-5-' + id}"></label>
-                                                    <input data-score="4" class="star star-4" th:id="*{'star-4-' + id}"
+                                                    <input data-score="4" class="star vote star-4" th:id="*{'star-4-' + id}"
                                                            type="radio" name="star"/>
                                                     <label class="star star-4" th:for="*{'star-4-' + id}"></label>
-                                                    <input data-score="3" class="star star-3" th:id="*{'star-3-' + id}"
+                                                    <input data-score="3" class="star vote star-3" th:id="*{'star-3-' + id}"
                                                            type="radio" name="star"/>
                                                     <label class="star star-3" th:for="*{'star-3-' + id}"></label>
-                                                    <input data-score="2" class="star star-2" th:id="*{'star-2-' + id}"
+                                                    <input data-score="2" class="star vote star-2" th:id="*{'star-2-' + id}"
                                                            type="radio" name="star"/>
                                                     <label class="star star-2" th:for="*{'star-2-' + id}"></label>
-                                                    <input data-score="1" class="star star-1" th:id="*{'star-1-' + id}"
+                                                    <input data-score="1" class="star vote star-1" th:id="*{'star-1-' + id}"
                                                            type="radio" name="star"/>
                                                     <label class="star star-1" th:for="*{'star-1-' + id}"></label>
                                                 </form>
@@ -484,19 +484,19 @@
                                         <div class="row">
                                             <div class="stars">
                                                 <form action="" th:data-score="*{id}">
-                                                    <input data-score="5" class="star star-5" th:id="*{'star-5-' + id}"
+                                                    <input data-score="5" class="star vote star-5" th:id="*{'star-5-' + id}"
                                                            type="radio" name="star"/>
                                                     <label class="star star-5" th:for="*{'star-5-' + id}"></label>
-                                                    <input data-score="4" class="star star-4" th:id="*{'star-4-' + id}"
+                                                    <input data-score="4" class="star vote star-4" th:id="*{'star-4-' + id}"
                                                            type="radio" name="star"/>
                                                     <label class="star star-4" th:for="*{'star-4-' + id}"></label>
-                                                    <input data-score="3" class="star star-3" th:id="*{'star-3-' + id}"
+                                                    <input data-score="3" class="star vote star-3" th:id="*{'star-3-' + id}"
                                                            type="radio" name="star"/>
                                                     <label class="star star-3" th:for="*{'star-3-' + id}"></label>
-                                                    <input data-score="2" class="star star-2" th:id="*{'star-2-' + id}"
+                                                    <input data-score="2" class="star vote star-2" th:id="*{'star-2-' + id}"
                                                            type="radio" name="star"/>
                                                     <label class="star star-2" th:for="*{'star-2-' + id}"></label>
-                                                    <input data-score="1" class="star star-1" th:id="*{'star-1-' + id}"
+                                                    <input data-score="1" class="star vote star-1" th:id="*{'star-1-' + id}"
                                                            type="radio" name="star"/>
                                                     <label class="star star-1" th:for="*{'star-1-' + id}"></label>
                                                 </form>
@@ -545,27 +545,27 @@
                                         <div class="row">
                                             <div class="stars">
                                                 <form action="" th:data-score="${book.id}">
-                                                    <input data-score="5" class="star star-5"
+                                                    <input data-score="5" class="star vote star-5"
                                                            th:id="${'star-5-xs-' + book.id}"
                                                            type="radio" name="star"/>
                                                     <label class="star star-5"
                                                            th:for="${'star-5-xs-' + book.id}"></label>
-                                                    <input data-score="4" class="star star-4"
+                                                    <input data-score="4" class="star vote star-4"
                                                            th:id="${'star-4-xs-' + book.id}"
                                                            type="radio" name="star"/>
                                                     <label class="star star-4"
                                                            th:for="${'star-4-xs-' + book.id}"></label>
-                                                    <input data-score="3" class="star star-3"
+                                                    <input data-score="3" class="star vote star-3"
                                                            th:id="${'star-3-xs-' + book.id}"
                                                            type="radio" name="star"/>
                                                     <label class="star star-3"
                                                            th:for="${'star-3-xs-' + book.id}"></label>
-                                                    <input data-score="2" class="star star-2"
+                                                    <input data-score="2" class="star vote star-2"
                                                            th:id="${'star-2-xs-' + book.id}"
                                                            type="radio" name="star"/>
                                                     <label class="star star-2"
                                                            th:for="${'star-2-xs-' + book.id}"></label>
-                                                    <input data-score="1" class="star star-1"
+                                                    <input data-score="1" class="star vote star-1"
                                                            th:id="${'star-1-xs-' + book.id}"
                                                            type="radio" name="star"/>
                                                     <label class="star star-1"
@@ -771,27 +771,27 @@
                                                 <div class="row">
                                                     <div class="stars">
                                                         <form action="" th:data-score="*{id}">
-                                                            <input data-score="5" class="star star-5"
+                                                            <input data-score="5" class="star vote star-5"
                                                                    th:id="*{'star-5-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-5"
                                                                    th:for="*{'star-5-lg-' + id}"></label>
-                                                            <input data-score="4" class="star star-4"
+                                                            <input data-score="4" class="star vote star-4"
                                                                    th:id="*{'star-4-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-4"
                                                                    th:for="*{'star-4-lg-' + id}"></label>
-                                                            <input data-score="3" class="star star-3"
+                                                            <input data-score="3" class="star vote star-3"
                                                                    th:id="*{'star-3-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-3"
                                                                    th:for="*{'star-3-lg-' + id}"></label>
-                                                            <input data-score="2" class="star star-2"
+                                                            <input data-score="2" class="star vote star-2"
                                                                    th:id="*{'star-2-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-2"
                                                                    th:for="*{'star-2-lg-' + id}"></label>
-                                                            <input data-score="1" class="star star-1"
+                                                            <input data-score="1" class="star vote star-1"
                                                                    th:id="*{'star-1-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-1"
@@ -860,27 +860,27 @@
                                                 <div class="row">
                                                     <div class="stars">
                                                         <form action="" th:data-score="*{id}">
-                                                            <input data-score="5" class="star star-5"
+                                                            <input data-score="5" class="star vote star-5"
                                                                    th:id="*{'star-5-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-5"
                                                                    th:for="*{'star-5-lg-' + id}"></label>
-                                                            <input data-score="4" class="star star-4"
+                                                            <input data-score="4" class="star vote star-4"
                                                                    th:id="*{'star-4-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-4"
                                                                    th:for="*{'star-4-lg-' + id}"></label>
-                                                            <input data-score="3" class="star star-3"
+                                                            <input data-score="3" class="star vote star-3"
                                                                    th:id="*{'star-3-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-3"
                                                                    th:for="*{'star-3-lg-' + id}"></label>
-                                                            <input data-score="2" class="star star-2"
+                                                            <input data-score="2" class="star vote star-2"
                                                                    th:id="*{'star-2-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-2"
                                                                    th:for="*{'star-2-lg-' + id}"></label>
-                                                            <input data-score="1" class="star star-1"
+                                                            <input data-score="1" class="star vote star-1"
                                                                    th:id="*{'star-1-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-1"
@@ -949,27 +949,27 @@
                                                 <div class="row">
                                                     <div class="stars">
                                                         <form action="" th:data-score="*{id}">
-                                                            <input data-score="5" class="star star-5"
+                                                            <input data-score="5" class="star vote star-5"
                                                                    th:id="*{'star-5-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-5"
                                                                    th:for="*{'star-5-lg-' + id}"></label>
-                                                            <input data-score="4" class="star star-4"
+                                                            <input data-score="4" class="star vote star-4"
                                                                    th:id="*{'star-4-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-4"
                                                                    th:for="*{'star-4-lg-' + id}"></label>
-                                                            <input data-score="3" class="star star-3"
+                                                            <input data-score="3" class="star vote star-3"
                                                                    th:id="*{'star-3-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-3"
                                                                    th:for="*{'star-3-lg-' + id}"></label>
-                                                            <input data-score="2" class="star star-2"
+                                                            <input data-score="2" class="star vote star-2"
                                                                    th:id="*{'star-2-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-2"
                                                                    th:for="*{'star-2-lg-' + id}"></label>
-                                                            <input data-score="1" class="star star-1"
+                                                            <input data-score="1" class="star vote star-1"
                                                                    th:id="*{'star-1-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-1"
@@ -1038,27 +1038,27 @@
                                                 <div class="row">
                                                     <div class="stars">
                                                         <form action="" th:data-score="*{id}">
-                                                            <input data-score="5" class="star star-5"
+                                                            <input data-score="5" class="star vote star-5"
                                                                    th:id="*{'star-5-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-5"
                                                                    th:for="*{'star-5-lg-' + id}"></label>
-                                                            <input data-score="4" class="star star-4"
+                                                            <input data-score="4" class="star vote star-4"
                                                                    th:id="*{'star-4-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-4"
                                                                    th:for="*{'star-4-lg-' + id}"></label>
-                                                            <input data-score="3" class="star star-3"
+                                                            <input data-score="3" class="star vote star-3"
                                                                    th:id="*{'star-3-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-3"
                                                                    th:for="*{'star-3-lg-' + id}"></label>
-                                                            <input data-score="2" class="star star-2"
+                                                            <input data-score="2" class="star vote star-2"
                                                                    th:id="*{'star-2-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-2"
                                                                    th:for="*{'star-2-lg-' + id}"></label>
-                                                            <input data-score="1" class="star star-1"
+                                                            <input data-score="1" class="star vote star-1"
                                                                    th:id="*{'star-1-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-1"
@@ -1132,27 +1132,27 @@
                                                 <div class="row">
                                                     <div class="stars">
                                                         <form action="" th:data-score="*{id}">
-                                                            <input data-score="5" class="star star-5"
+                                                            <input data-score="5" class="star vote star-5"
                                                                    th:id="*{'star-5-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-5"
                                                                    th:for="*{'star-5-lg-' + id}"></label>
-                                                            <input data-score="4" class="star star-4"
+                                                            <input data-score="4" class="star vote star-4"
                                                                    th:id="*{'star-4-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-4"
                                                                    th:for="*{'star-4-lg-' + id}"></label>
-                                                            <input data-score="3" class="star star-3"
+                                                            <input data-score="3" class="star vote star-3"
                                                                    th:id="*{'star-3-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-3"
                                                                    th:for="*{'star-3-lg-' + id}"></label>
-                                                            <input data-score="2" class="star star-2"
+                                                            <input data-score="2" class="star vote star-2"
                                                                    th:id="*{'star-2-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-2"
                                                                    th:for="*{'star-2-lg-' + id}"></label>
-                                                            <input data-score="1" class="star star-1"
+                                                            <input data-score="1" class="star vote star-1"
                                                                    th:id="*{'star-1-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-1"
@@ -1223,27 +1223,27 @@
                                                 <div class="row">
                                                     <div class="stars">
                                                         <form action="" th:data-score="*{id}">
-                                                            <input data-score="5" class="star star-5"
+                                                            <input data-score="5" class="star vote star-5"
                                                                    th:id="*{'star-5-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-5"
                                                                    th:for="*{'star-5-lg-' + id}"></label>
-                                                            <input data-score="4" class="star star-4"
+                                                            <input data-score="4" class="star vote star-4"
                                                                    th:id="*{'star-4-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-4"
                                                                    th:for="*{'star-4-lg-' + id}"></label>
-                                                            <input data-score="3" class="star star-3"
+                                                            <input data-score="3" class="star vote star-3"
                                                                    th:id="*{'star-3-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-3"
                                                                    th:for="*{'star-3-lg-' + id}"></label>
-                                                            <input data-score="2" class="star star-2"
+                                                            <input data-score="2" class="star vote star-2"
                                                                    th:id="*{'star-2-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-2"
                                                                    th:for="*{'star-2-lg-' + id}"></label>
-                                                            <input data-score="1" class="star star-1"
+                                                            <input data-score="1" class="star vote star-1"
                                                                    th:id="*{'star-1-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-1"
@@ -1314,27 +1314,27 @@
                                                 <div class="row">
                                                     <div class="stars">
                                                         <form action="" th:data-score="*{id}">
-                                                            <input data-score="5" class="star star-5"
+                                                            <input data-score="5" class="star vote star-5"
                                                                    th:id="*{'star-5-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-5"
                                                                    th:for="*{'star-5-lg-' + id}"></label>
-                                                            <input data-score="4" class="star star-4"
+                                                            <input data-score="4" class="star vote star-4"
                                                                    th:id="*{'star-4-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-4"
                                                                    th:for="*{'star-4-lg-' + id}"></label>
-                                                            <input data-score="3" class="star star-3"
+                                                            <input data-score="3" class="star vote star-3"
                                                                    th:id="*{'star-3-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-3"
                                                                    th:for="*{'star-3-lg-' + id}"></label>
-                                                            <input data-score="2" class="star star-2"
+                                                            <input data-score="2" class="star vote star-2"
                                                                    th:id="*{'star-2-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-2"
                                                                    th:for="*{'star-2-lg-' + id}"></label>
-                                                            <input data-score="1" class="star star-1"
+                                                            <input data-score="1" class="star vote star-1"
                                                                    th:id="*{'star-1-lg-' + id}"
                                                                    type="radio" name="star"/>
                                                             <label class="star star-1"
@@ -1816,7 +1816,7 @@
         crossorigin="anonymous"></script>
 <script>
     $(document).ready(function () {
-        $('.star').on('click', function () {
+        $('.vote').on('click', function () {
             const vote = parseInt($(this).attr('data-score'));
             const bookId = parseInt($(this).parent().attr('data-score'));
             console.log(vote + " " + bookId);
